@@ -196,9 +196,7 @@
             
             <div class="col-lg-3 mb-4">
                 <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action selected">
-                    ROC Ter-AA
-                  </a>
+                  <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action selected">ROC Ter-AA <i class="fas fa-chevron-circle-right float-right"></i></p>
                   <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Station Helmond <i class="fas fa-chevron-circle-right float-right"></i></p>
                   <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Morbi leo risus <i class="fas fa-chevron-circle-right float-right"></i></p>
                   <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Porta ac consectetur ac <i class="fas fa-chevron-circle-right float-right"></i></p>

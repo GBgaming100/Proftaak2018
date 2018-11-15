@@ -19,6 +19,7 @@ $( document ).ready(function() {
 
   	addToCard();
 
+  	gotovending();
 });
 
 $( window ).resize(function(){
@@ -240,5 +241,15 @@ function checkbox(className, all)
 				$(allCheckbox).prop('checked', false);
 			}
 		}
+	});
+}
+
+function gotovending()
+{
+	$(".dblVending").dblclick(function(){
+
+		var url = $(this).data("link");
+
+		window.location = url;
 	});
 }

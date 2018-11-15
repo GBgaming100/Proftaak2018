@@ -2,6 +2,12 @@
     
     include("inc/functions.php");
 
+    $id = $_GET['id'];
+
+    $sql = "SELECT name FROM vendingmachines WHERE id = ". $id;
+
+    $name = connectWithDatabase($sql)[0]['name'];
+
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +45,10 @@
         <ol class="breadcrumb bg-transparent">
             <li class="breadcrumb-item text-primary"><a href="#">Home</a></li>
             <li class="breadcrumb-item text-primary"><a href="#">Locaties</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Roc Ter AA</li>
+            <li class="breadcrumb-item active" aria-current="page"><?php echo($name); ?></li>
         </ol>
 
-        <h3>Locatie: ROC Ter AA</h3>
+        <h3>Locatie: <?php echo($name); ?></h3>
 
         <h5>Producten</h5>
         <hr>   
@@ -52,7 +58,7 @@
                 <div class="input-group mb-3">
                           <input type="text" id="search" class="form-control" placeholder="Search" aria-label="Search for servers" aria-describedby="search-bar">
                           <div class="input-group-append">
-                            <span class="input-group-text bg-primary text-white" id="search-bar">
+                            <span class="input-group-text bg-primary text-white" id="search-bar" data-machine="<?php echo($id); ?>">
                                 <i class="fas fa-search"></i>
                             </span>
                           </div>
@@ -138,7 +144,7 @@
 
                       <h3 class="text-white">€{{price}}</h3>
 
-                      <button class="btn btn-primary btn-addToCard" value="{{id}}>" data-machine="{{machine_id}}"><i class="fas fa-cart-plus"></i> Add to Card</button>
+                      <button class="btn btn-primary btn-addToCard" value="{{id}}>" data-machine="<?php echo($id); ?>"><i class="fas fa-cart-plus"></i> Add to Card</button>
                     </div>
                 </div>
 

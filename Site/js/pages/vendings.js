@@ -1,3 +1,4 @@
+var machineId = getUrlParameter("id");
 var search = "";
 var filter = "ORDER BY p.name ASC";
 var catogoriesOption = [];
@@ -17,7 +18,6 @@ $( document ).ready(function() {
 
 	flipCards();
 
-  	barcode();
   	addToCard();
 
 });
@@ -91,7 +91,7 @@ function addToCard()
 	{
 
 		var id = $(this).val();
-		var vending = 1;
+		var vending = $(this).data("machine");
 
 		console.log(id);
 
@@ -182,12 +182,14 @@ function catergoryfilter(){
 
 function getproducts()
 {
+	console.log(machineId);
 
 	$.ajax({ 
 			type: "POST",
 			dataType: "json",
 			data: 
 			{
+				id: machineId,
 				search: search,
 				filter: filter,
 				categories: catogoriesOption
@@ -241,4 +243,19 @@ function checkbox(className, all)
 			}
 		}
 	});
+}
+
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
 }

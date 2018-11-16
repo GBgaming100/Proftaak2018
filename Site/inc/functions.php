@@ -27,6 +27,9 @@
 
 			<link rel="icon" href="https://image.flaticon.com/icons/png/128/1020/1020421.png">
 
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+			<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
 		<?php
 	}
 
@@ -129,7 +132,9 @@
 
 			        </div>
 
-			        <button class="btn btn-secondary w-100 mt-4" data-toggle="modal" data-target="#barcode"><i class="fas fa-money-bill"></i> Betalen</button>
+			        <button class="btn btn-secondary btn-genratebarcode w-100 mt-4" data-toggle="modal" data-target="#barcode" value="{{id}}">
+			        	<i class="fas fa-money-bill"></i> Betalen
+			        </button>
 
 			      </div>
 			    </div>
@@ -156,7 +161,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div id="testQR"></div>
       </div>
       <div class="modal-footer text-center">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
@@ -184,6 +189,11 @@
 		    
 		    <!-- Font Awsome JS -->
 		    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+		    <!-- instascan.min JS-->
+		    <script src="dest/js/instascan.min.js"></script>
+
+		    <!-- qrcode JS -->
+		    <script src="dest/js/qrcode.js"></script>
 
 			<!-- sal.js -->
 			<script src = "js/functions/sal.js"></script>

@@ -314,5 +314,5 @@ input[type='checkbox'] + .checkbox, input[type='radio'] + .checkbox {
   height: auto;
   min-height: 100%;
   border-radius: 0;
-  background: #ef4873;
+  /*background: #ef4873;*/
 }

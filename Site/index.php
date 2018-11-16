@@ -196,26 +196,32 @@
             
             <div class="col-lg-3 mb-4">
                 <div class="list-group">
-                  <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action selected">ROC Ter-AA <i class="fas fa-chevron-circle-right float-right"></i></p>
-                  <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Station Helmond <i class="fas fa-chevron-circle-right float-right"></i></p>
-                  <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Morbi leo risus <i class="fas fa-chevron-circle-right float-right"></i></p>
-                  <p data-link="vending.php?id=1" class="dblVending list-group-item list-group-item-action">Porta ac consectetur ac <i class="fas fa-chevron-circle-right float-right"></i></p>
+                <?php
+
+                $sql = "SELECT * FROM vendingmachines";
+
+                $vendingmachines = connectWithDatabase($sql);
+
+                foreach ($vendingmachines as $vending) {
+
+                ?>
+                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"><?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
+
+                <?php } ?>
+                  
                 </div>
             </div>
             <div class="col-lg-9 mb-4">
-                <div id="googleMap" style="width:100%;height:400px;"></div>
+                <div id="map" style="width:100%;height:400px;"></div>
 
                 <script>
-                function myMap() {
-                var mapProp= {
-                    center:new google.maps.LatLng(52.092876, 5.104480),
-                    zoom:7,
-                };
-                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                }
-                </script>
 
-                <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+                var map = L.map('map', {
+                    center: [52.092876, 5.104480],
+                    zoom: 13
+                });
+
+                </script>
 
 
 

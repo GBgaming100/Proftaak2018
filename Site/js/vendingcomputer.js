@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 
   scanner(false);
-  vendingdata("13(2,3,50,99)");
+  vendingdata("1(11,13,15,17)");
 
 });
 

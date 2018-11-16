@@ -105,29 +105,34 @@ function cardPay()
 
 	$("body").on("click", ".btn-genratebarcode", function()
 	{
-		var id = ($(this).val() - 1);
+		var id = $(this).val();
 
 		$.ajax({ 
-			type: "GET",
+			type: "POST",
 			dataType: "json",
+			data:{
+				machine: id
+			},
 
-			url: "inc/card/receiveCard.php",
+			url: "inc/card/receiveposition.php",
 
 			success: function(data)
 			{  
-				var string = "1(1,2,3,4)";
 
-				string = (id + 1) + "(";
-				var products = data[id]['card'];
-				var productIds = [];
+				console.table(data);
 
-				$.each(products, function(index, value)
+				var string = "";
+
+				string = id + "(";
+				var positions = [];
+
+				$.each(data, function(index, value)
 				{
 
-					productIds.push(value['id']);
+					positions.push(value['position']);
 
 				})
-				string += productIds;
+				string += positions;
 				string += ")";
 
 

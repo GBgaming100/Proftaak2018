@@ -14,15 +14,14 @@
      </title>
 
     <!-- Customize MetaTag Start -->
-    <meta name="description" content="Renegade Network: <?php echo $description['about_text'];?>"
+    <meta name="description" content="My Vending"
     />
 
-    <meta name='keywords' content='MTA SA FiveM GTA SA GTA V RenegadeNetwork'>
-    <meta name='url' content='http://renegadenetwork.tk/'>
+    <meta name='keywords' content='My Vending vendingmachine'>
     <meta name='coverage' content='Worldwide'>
-    <meta name='copyright' content='Renegade Network'>
+    <meta name='copyright' content='My Vending'>
 
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#ef4873">
 
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -235,6 +234,34 @@
 
         <h3 class="section-title">Over Ons</h3>
         <hr>   
+
+        <div class="row">
+
+            <?php 
+
+            $sql = "SELECT * FROM about";
+
+            $about = connectWithDatabase($sql);
+
+            foreach ($about as $a) {
+
+            ?>
+
+            <div class="col-sm">
+                <div class="card text-center">
+                    <img src="<?php echo $a['img'];?>" class="about-img card-img-top m-auto">
+                    <!-- <i class="fas fa-dog fa-4x m-auto text-primary"></i> -->
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $a['title'];?></h5>
+                        <p class="card-text"><?php echo $a['text'];?></p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+
+            <?php } ?>
+
+        </div>
 
     </section>
 

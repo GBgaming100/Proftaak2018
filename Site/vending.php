@@ -20,15 +20,14 @@
      </title>
 
     <!-- Customize MetaTag Start -->
-    <meta name="description" content="Renegade Network: <?php echo $description['about_text'];?>"
+     <meta name="description" content="My Vending"
     />
 
-    <meta name='keywords' content='MTA SA FiveM GTA SA GTA V RenegadeNetwork'>
-    <meta name='url' content='http://renegadenetwork.tk/'>
+    <meta name='keywords' content='My Vending vendingmachine'>
     <meta name='coverage' content='Worldwide'>
-    <meta name='copyright' content='Renegade Network'>
+    <meta name='copyright' content='My Vending'>
 
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#ef4873">
 
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -144,7 +143,9 @@
 
                       <h3 class="text-white">€{{price}}</h3>
 
-                      <button class="btn btn-primary btn-addToCard" value="{{id}}>" data-machine="<?php echo($id); ?>"><i class="fas fa-cart-plus"></i> Add to Card</button>
+                      <button class="btn btn-primary btn-addToCard" value="{{id}}" data-machine="<?php echo($id); ?>" data-user="<?php echo($_SESSION['id']); ?>">
+                        <i class="fas fa-cart-plus"></i> Add to Card
+                      </button>
                     </div>
                 </div>
 

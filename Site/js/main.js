@@ -1,6 +1,8 @@
 $.getScript( "js/functions/function_mustache.js" );
 $.getScript( "js/functions/function_debug.js" );
 
+var user = $("#mycard").data("user");
+console.log(user);
 
 $( document ).ready(function() {
 
@@ -10,6 +12,8 @@ $( document ).ready(function() {
   	getCard();
   	cardPay();
 
+  	alerts();
+
 });
 
 
@@ -17,6 +21,7 @@ function removeFromCard()
 {
 
 	$("body").on("click", ".btn-deleteCardItem", function(){
+
 		var id = $(this).data("product");
 
 		console.log(id);
@@ -25,23 +30,31 @@ function removeFromCard()
 			type: "POST",
 			dataType: "json",
 			data: {
-				productId: id
+				productId: id,
+				userId: user
 			},
 
 			url: "inc/card/removeFromCard.php"
 			
 		});
 
+
 		getCard();
+
+		alerts();
+		alerts();
 	});
 
 }
 
 function getCard()
-{
+{	
 	$.ajax({ 
-			type: "GET",
+			type: "POST",
 			dataType: "json",
+			data: {
+				userId: user
+			},
 
 			url: "inc/card/receiveCard.php",
 
@@ -197,4 +210,26 @@ function generateQR(container, text, type){
 
     image: null
   });
+}
+
+function alerts()
+{
+
+	$.ajax({ 
+		type: "GET",
+		dataType: "json",
+
+		url: "inc/messages/messages.php",
+
+		success: function(data)
+		{  
+
+			$.each(data, function(i, v)
+			{
+				$(".alert-container").append('<div class="alert alert-'+v['Type']+' m-t-1 text-xs-center" role="alert"><i class="'+v['Icon']+' fa-fw fa-lg"></i> '+v['Text']+'</div>');
+				$(".alert:last-child").slideUp( 0 ).slideDown( "slow" ).delay( 8000 ).slideUp( "slow" );
+			})
+
+		}
+	});
 }

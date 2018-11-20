@@ -92,6 +92,7 @@ function addToCard()
 
 		var id = $(this).val();
 		var vending = $(this).data("machine");
+		var user = $(this).data("user");
 
 		console.log(id);
 
@@ -100,7 +101,8 @@ function addToCard()
 			dataType: "json",
 			data: {
 				productId: id,
-				vendingId: vending
+				vendingId: vending,
+				userId: user
 			},
 
 			url: "inc/card/addToCard.php"
@@ -109,6 +111,9 @@ function addToCard()
 
 		getCard();
 
+		alerts();
+		alerts();
+		
 
 	});
 }

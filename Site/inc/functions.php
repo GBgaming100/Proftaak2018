@@ -33,6 +33,55 @@
 		<?php
 	}
 
+	function addMessage($type, $text)
+	{
+
+	if (!isset($_SESSION['messages'])) {
+		$_SESSION['messages'] = [];
+	}
+
+	$id = sizeof($_SESSION['messages']);
+	$icon = "";
+	switch ($type) {
+		case 'success':
+			$icon = "fa fa-check";
+			break;
+
+		case 'danger':
+			$icon = "fa fa-exclamation";
+			break;
+
+
+		case 'info':
+			$icon = "fa fa-info-circle";
+			break;
+
+		case 'warning':
+			$icon = "fas fa-exclamation-triangle";
+			break;
+		
+		default:
+			$icon = "fa fa-check";
+			break;
+	}
+
+
+	$message = array('Id' => $id, 'Type' => $type, 'Text' => $text, 'Icon' => $icon);
+
+
+	array_push($_SESSION['messages'], $message);
+
+	}
+
+	function alerts()
+	{
+		?>
+
+		<div class="alert-container"></div>
+
+		<?php
+	}
+
 	function importHeader($scrolled)
 	{
 	?>
@@ -43,23 +92,47 @@
         <img src="https://image.flaticon.com/icons/png/128/1020/1020421.png" width="30" height="30" class="d-inline-block align-top" alt="">
         My Vending
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link color-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <ul class="navbar-nav float-right">
+
+		<?php if (!isset($_SESSION["user"])) { ?>
+          <li class="nav-item mr-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </li>
+
+          <li class="nav-item mr-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAccountModal">
+              <i class="fas fa-user-plus"></i> creëer account
+            </button>
+          </li>
+  		<?php }else{ ?>
+      
+          <li class="nav-item te">
+            <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-basket"></i> Lijst
             </a>
           </li>
+
+          <li class="nav-item mr-1">
+            <a href="inc/user/signout.php" class="btn btn-primary text-white">
+              <i class="fas fa-sign-out-alt"></i> Sign Out
+            </a>
+          </li>
+          
+  		<?php } ?>
+
         </ul>
       </div>
     </div>
     </nav>
 
     <!-- mycard -->
-	<div class="modal fade" id="mycard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="mycard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-user="<?php echo $_SESSION['id'];?>">
 	  <div class="modal-dialog  modal-dialog-centered" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -171,7 +244,102 @@
   </div>
 </div>
 
+<!-- Modal Login-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="inc/user/signin.php" method="post" class="modal-content needs-validation" novalidate>
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginTitle">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-white" id="basic-addon1"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Gebruikersnaam" name="username" aria-label="Username" aria-describedby="basic-addon1" required>
+              <div class="invalid-feedback">
+		         Voer gebruikersnaam in.
+		       </div>
+            </div>
+
+            <div class="input-group mb-3 pass_show">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-white" id="basic-addon2"><i class="fas fa-unlock-alt"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Wachtwoord" name="password" aria-label="Password" aria-describedby="basic-addon2" required>
+               <div class="invalid-feedback">
+		          Voer wachtwoord in.
+		       </div>
+            </div>
+            <a href="forgotpassword.php">Wachtwoord vergeten?</a>
+
+        </div> 
+      <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">Login</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal create account-->
+<div class="modal fade" id="createAccountModal" tabindex="-1" role="dialog" aria-labelledby="createtitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="inc/user/signup.php" method="post" class="modal-content needs-validation" novalidate>
+      <div class="modal-header">
+        <h5 class="modal-title" id="createtitle">Create Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-white" id="basic-addon1"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control create-name" placeholder="Gebruikersnaam" name="username" aria-label="Username" aria-describedby="basic-addon1" required>
+              <div class="invalid-feedback">
+		          Voer gebruikersnaam in.
+		       </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-white" id="basic-addon2"><i class="fas fa-envelope-open"></i></span>
+              </div>
+              <input type="email" class="form-control create-email" placeholder="E-mail" name="mail" aria-label="mail" aria-describedby="basic-addon2" required>
+              <div class="invalid-feedback">
+		          Voer e-mail in.
+		       </div>
+            </div>
+
+            <div class="input-group mb-3 pass_show">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-white" id="basic-addon3"><i class="fas fa-unlock-alt"></i></span>
+              </div>
+              <input type="password" class="form-control create-password" placeholder="Wachtwoord" name="password" aria-label="Password" aria-describedby="basic-addon3" required>
+              <div class="invalid-feedback">
+		          Voer wachtwoord in.
+		       </div>
+            </div>
+        </div> 
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-create">Create Account</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+
     <?php
+
+    alerts();
+
 	}
 
 	function js()
@@ -188,7 +356,8 @@
 		    <script src="dest/js/mustache.js"></script>
 		    
 		    <!-- Font Awsome JS -->
-		    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+		    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
 		    <!-- instascan.min JS-->
 		    <script src="dest/js/instascan.min.js"></script>
 

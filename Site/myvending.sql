@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 15 nov 2018 om 08:14
+-- Genereertijd: 20 nov 2018 om 14:50
 -- Serverversie: 5.6.13
 -- PHP-versie: 5.4.17
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `myvending` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `myvending`;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `about`
+--
+
+CREATE TABLE IF NOT EXISTS `about` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img` text NOT NULL,
+  `title` text NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `about`
+--
+
+INSERT INTO `about` (`id`, `img`, `title`, `text`) VALUES
+(1, 'img/about/max.jpg', 'Max van den Boom', 'Gangsters uit Gmert'),
+(2, 'img/about/maarten.jpg', 'Maarten Jakobs', 'Die gast die alles heeft gemaakt\r\n'),
+(3, 'img/about/rocteraa.jpeg', 'ROC Ter-AA', 'Die ene school waar je alles zelf moet doen');
 
 -- --------------------------------------------------------
 
@@ -80,18 +103,14 @@ CREATE TABLE IF NOT EXISTS `mycard` (
   `product_id` int(255) NOT NULL,
   `vending_id` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `mycard`
 --
 
 INSERT INTO `mycard` (`id`, `user_id`, `product_id`, `vending_id`) VALUES
-(23, 1, 1, 1),
-(26, 1, 4, 1),
-(27, 1, 3, 1),
-(28, 1, 1, 1),
-(29, 1, 1, 1);
+(63, 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +144,29 @@ INSERT INTO `products` (`id`, `name`, `price`, `img`, `background`, `cat_id`) VA
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(100) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
+  `user_email` varchar(500) NOT NULL,
+  `user_rank` int(11) NOT NULL,
+  `user_forgotpasscode` text NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_email`, `user_rank`, `user_forgotpasscode`) VALUES
+(5, 'maarten', '005147622d52a589c71d48564cabc35e', 'maarten.jakobs@gmail.com', 0, '');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `vendingassortiment`
 --
 
@@ -132,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `vendingassortiment` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `machine_id` int(255) NOT NULL,
   `product_id` int(255) NOT NULL,
+  `position` int(2) NOT NULL,
   `stock` int(5) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -140,11 +183,11 @@ CREATE TABLE IF NOT EXISTS `vendingassortiment` (
 -- Gegevens worden uitgevoerd voor tabel `vendingassortiment`
 --
 
-INSERT INTO `vendingassortiment` (`id`, `machine_id`, `product_id`, `stock`) VALUES
-(1, 1, 1, 0),
-(2, 1, 2, 10),
-(3, 1, 3, 10),
-(4, 1, 4, 10);
+INSERT INTO `vendingassortiment` (`id`, `machine_id`, `product_id`, `position`, `stock`) VALUES
+(1, 2, 1, 11, 0),
+(2, 1, 2, 13, 10),
+(3, 1, 3, 15, 10),
+(4, 1, 4, 17, 10);
 
 -- --------------------------------------------------------
 

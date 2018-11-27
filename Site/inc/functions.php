@@ -21,6 +21,8 @@
 			<link href="https://fonts.googleapis.com/css?family=Lily+Script+One|Montserrat" rel="stylesheet">
 
 			<link rel="stylesheet" href="dest/css/bootstrap.min.css">
+			<link rel="stylesheet" href="dest/css/glider.css" />
+
 			<link rel="stylesheet" href="css/style.css" >
 
 			<link rel="stylesheet" type="text/css" href="css/sal.css">
@@ -28,7 +30,7 @@
 			<link rel="icon" href="https://image.flaticon.com/icons/png/128/1020/1020421.png">
 
 			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
-			<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+			<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>			
 
 		<?php
 	}
@@ -360,6 +362,9 @@
 
 		    <!-- instascan.min JS-->
 		    <script src="dest/js/instascan.min.js"></script>
+
+		    <!-- glider JS-->
+		    <script src="dest/js/glider.js"></script>
 
 		    <!-- qrcode JS -->
 		    <script src="dest/js/qrcode.js"></script>

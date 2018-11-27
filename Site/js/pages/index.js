@@ -202,6 +202,7 @@ function getproducts()
 				mustache(data, "#products-templates", "#products");
 
 				cardHeights();
+				cardHeights();
 
 			}
 		});

@@ -173,11 +173,13 @@
             <template id="products-templates">
                 {{#.}}
 
-                <div class="col-lg-3 position-relative price-container">   
-                    <div class="card position-absolute" style="background: {{background}}">
-                      <img class="card-img-top" src="{{img}}" alt="Card image cap">
-                      <h4 class="pricetag">€{{price}}</h4>
-                    </div>
+                <div class="col-lg-3 position-relative price-container">
+                    <a href="product.php?id={{id}}">   
+                        <div class="card position-absolute" style="background: {{background}}">
+                          <img class="card-img-top" src="{{img}}" alt="Card image cap">
+                          <h4 class="pricetag">€{{price}}</h4>
+                        </div>
+                    </a>
                 </div>
 
                 {{/.}}
@@ -204,23 +206,16 @@
                 foreach ($vendingmachines as $vending) {
 
                 ?>
-                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"><?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
+                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" data-marker="<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"><?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
 
                 <?php } ?>
                   
                 </div>
             </div>
             <div class="col-lg-9 mb-4">
-                <div id="map" style="width:100%;height:400px;"></div>
+                <div id="map" style="width:100%;height:400px;z-index:1;"></div>
 
-                <script>
 
-                var map = L.map('map', {
-                    center: [52.092876, 5.104480],
-                    zoom: 13
-                });
-
-                </script>
 
 
 
@@ -291,4 +286,72 @@
         });
 
     </script>
+
+    <script>
+        var markers = [];
+
+        var map = L.map('map').setView([52.092876, 5.104480], 7);
+
+        var myIcon = L.icon({
+            iconUrl: 'img/marker.png',
+            iconSize: [38, 38],
+            iconAnchor: [22, 22],
+            popupAnchor: [-3, -76]
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">Maarten & Max</a> Developers'
+        }).addTo(map);
+
+        $.ajax({ 
+            type: "GET",
+            dataType: "json",
+            url: "inc/map/getmapdata.php",
+
+            success: function(data)
+            {  
+
+                $.each(data, function(index, value){
+
+                    var marker = L.marker([value['lat'], value['long']], {icon: myIcon}).addTo(map)
+                    .bindPopup(value['name']+'.<br> <a href="vending.php?id='+value['id']+'">Beijk Vending</a>.');
+
+                    marker["id"]=value['id'];
+                    marker["lat"]=value['lat'];
+                    marker["long"]=value['long'];
+                    markers.push(marker);
+
+                });
+                console.table(markers)
+            }
+        });
+
+        map.on('popupclose', function(e) {
+            $(".dblVending").removeClass("active");
+        });
+
+        $(".dblVending").on("click", function(){
+
+
+            markerId = $(this).data('marker');
+
+            $(".dblVending").removeClass("active");
+
+            $.each(markers, function(index, value){
+
+                if (value['id'] == markerId) 
+                {
+                    value.openPopup();
+
+                    map.setView([value['lat'], value['long']], 15);
+
+
+                }
+
+            })
+
+            $(this).addClass( "active" );
+
+        }); 
+                </script>
 </html>

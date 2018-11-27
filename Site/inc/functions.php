@@ -21,14 +21,16 @@
 			<link href="https://fonts.googleapis.com/css?family=Lily+Script+One|Montserrat" rel="stylesheet">
 
 			<link rel="stylesheet" href="dest/css/bootstrap.min.css">
+			<link rel="stylesheet" href="dest/css/glider.css" />
+
 			<link rel="stylesheet" href="css/style.css" >
 
 			<link rel="stylesheet" type="text/css" href="css/sal.css">
 
-			<link rel="icon" href="https://image.flaticon.com/icons/png/128/1020/1020421.png">
+			<link rel="icon" href="img/icon.png">
 
 			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
-			<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+			<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>			
 
 		<?php
 	}
@@ -89,7 +91,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light <?php echo $scrolled; ?>">
     <div class="container">
       <a class="navbar-brand" href="index.php">
-        <img src="https://image.flaticon.com/icons/png/128/1020/1020421.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="img/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
         My Vending
       </a>
       <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -360,6 +362,9 @@
 
 		    <!-- instascan.min JS-->
 		    <script src="dest/js/instascan.min.js"></script>
+
+		    <!-- glider JS-->
+		    <script src="dest/js/glider.js"></script>
 
 		    <!-- qrcode JS -->
 		    <script src="dest/js/qrcode.js"></script>

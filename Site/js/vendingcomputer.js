@@ -86,13 +86,19 @@ function vendingdata(value)
 
   console.table(products);
 
-  $.ajax({
-      url: "http://192.168.0.40/", //IP of Arduino
-      type: "POST",
-      data: {$vendingId: vendingId, products: products+"@"},
-      dataType: 'jsonp',
-      contentType: 'application/json',
-      crossDomain: true,
+  $.each(products, function(index, value){
+
+    console.log(value);
+
+    $.ajax({
+        url: "http://192.168.0.40/", //IP of Arduino
+        type: "POST",
+        data: {$vendingId: vendingId, productPosition: value+"@"},
+        dataType: 'jsonp',
+        contentType: 'application/json',
+        crossDomain: true,
+
+    });
 
   });
 

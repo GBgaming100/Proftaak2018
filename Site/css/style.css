@@ -154,7 +154,7 @@ nav
   left: 0;
 }
 
-.price-container{ height: 320px; }
+.price-container{ min-height: 220px; }
 
 .product-name
 {
@@ -329,4 +329,12 @@ input[type='checkbox'] + .checkbox, input[type='radio'] + .checkbox {
 {
   max-width: 150px;
   border-radius: 100%;
+}
+
+.leaflet-container a
+{
+  color: #ef4873 !important;
+}
+.active{
+  background:   #ef4873 !important;
 }

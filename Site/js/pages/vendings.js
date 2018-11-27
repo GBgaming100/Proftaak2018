@@ -10,9 +10,12 @@ $( document ).ready(function() {
 	searchName();
   	productfilter();
   	catergoryfilter();
+
+  	checkWitdh();
+
   	getproducts();
 
-	checkWitdh();
+
 
 	loadCF();
 
@@ -207,6 +210,7 @@ function getproducts()
 
 				mustache(data, "#products-templates", "#products");
 
+				cardHeights();
 				cardHeights();
 
 			}

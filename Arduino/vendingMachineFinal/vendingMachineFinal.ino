@@ -41,53 +41,53 @@ void loop() {
   delay(2850);
 }
 
-void initIO() {
-  Serial.println("TEST");
-  //init relai power io
-  pinMode(rowPowerMboo, OUTPUT);
-  pinMode(rowGroundMboo, OUTPUT);
-  digitalWrite(rowPowerMboo, HIGH);
-  digitalWrite(rowGroundMboo, LOW);
+  void initIO() {
+    Serial.println("TEST");
+    //init relai power io
+    pinMode(rowPowerMboo, OUTPUT);
+    pinMode(rowGroundMboo, OUTPUT);
+    digitalWrite(rowPowerMboo, HIGH);
+    digitalWrite(rowGroundMboo, LOW);
+    
+    pinMode(columPowerMboo, OUTPUT);
+    pinMode(columGroundMboo, OUTPUT);
+    digitalWrite(columPowerMboo, HIGH);
+    digitalWrite(columGroundMboo,LOW);
+    //init row io
+    pinMode(doRow1Mboo, OUTPUT);
+    pinMode(doRow2Mboo, OUTPUT);
+    pinMode(doRow3Mboo, OUTPUT);
+    pinMode(doRow4Mboo, OUTPUT);
+    pinMode(doRow5Mboo, OUTPUT);
+    pinMode(doRow6Mboo, OUTPUT);
+    pinMode(doRow7Mboo, OUTPUT);
+    pinMode(doRow8Mboo, OUTPUT);
   
-  pinMode(columPowerMboo, OUTPUT);
-  pinMode(columGroundMboo, OUTPUT);
-  digitalWrite(columPowerMboo, HIGH);
-  digitalWrite(columGroundMboo,LOW);
-  //init row io
-  pinMode(doRow1Mboo, OUTPUT);
-  pinMode(doRow2Mboo, OUTPUT);
-  pinMode(doRow3Mboo, OUTPUT);
-  pinMode(doRow4Mboo, OUTPUT);
-  pinMode(doRow5Mboo, OUTPUT);
-  pinMode(doRow6Mboo, OUTPUT);
-  pinMode(doRow7Mboo, OUTPUT);
-  pinMode(doRow8Mboo, OUTPUT);
-
-  digitalWrite(doRow1Mboo, HIGH);
-  digitalWrite(doRow2Mboo, HIGH);
-  digitalWrite(doRow3Mboo, HIGH);
-  digitalWrite(doRow4Mboo, HIGH);
-  digitalWrite(doRow5Mboo, HIGH);
-  digitalWrite(doRow6Mboo, HIGH);
-  digitalWrite(doRow7Mboo, HIGH);
-  digitalWrite(doRow8Mboo, HIGH);
+    digitalWrite(doRow1Mboo, HIGH);
+    digitalWrite(doRow2Mboo, HIGH);
+    digitalWrite(doRow3Mboo, HIGH);
+    digitalWrite(doRow4Mboo, HIGH);
+    digitalWrite(doRow5Mboo, HIGH);
+    digitalWrite(doRow6Mboo, HIGH);
+    digitalWrite(doRow7Mboo, HIGH);
+    digitalWrite(doRow8Mboo, HIGH);
+    
+    //init height io
+    pinMode(doColum1Mboo, OUTPUT);
+    pinMode(doColum2Mboo, OUTPUT);
+    pinMode(doColum3Mboo, OUTPUT);
+    pinMode(doColum4Mboo, OUTPUT);
+    pinMode(doColum5Mboo, OUTPUT);
+    pinMode(doColum6Mboo, OUTPUT);
+    pinMode(doColum7Mboo, OUTPUT);
+    pinMode(doColum8Mboo, OUTPUT);
   
-  //init height io
-  pinMode(doColum1Mboo, OUTPUT);
-  pinMode(doColum2Mboo, OUTPUT);
-  pinMode(doColum3Mboo, OUTPUT);
-  pinMode(doColum4Mboo, OUTPUT);
-  pinMode(doColum5Mboo, OUTPUT);
-  pinMode(doColum6Mboo, OUTPUT);
-  pinMode(doColum7Mboo, OUTPUT);
-  pinMode(doColum8Mboo, OUTPUT);
-
-  digitalWrite(doColum1Mboo, HIGH);
-  digitalWrite(doColum2Mboo, HIGH);
-  digitalWrite(doColum3Mboo, HIGH);
-  digitalWrite(doColum4Mboo, HIGH);
-  digitalWrite(doColum5Mboo, HIGH);
-  digitalWrite(doColum6Mboo, HIGH);
-  digitalWrite(doColum7Mboo, HIGH);
-  digitalWrite(doColum8Mboo, HIGH);
-}
+    digitalWrite(doColum1Mboo, HIGH);
+    digitalWrite(doColum2Mboo, HIGH);
+    digitalWrite(doColum3Mboo, HIGH);
+    digitalWrite(doColum4Mboo, HIGH);
+    digitalWrite(doColum5Mboo, HIGH);
+    digitalWrite(doColum6Mboo, HIGH);
+    digitalWrite(doColum7Mboo, HIGH);
+    digitalWrite(doColum8Mboo, HIGH);
+  }

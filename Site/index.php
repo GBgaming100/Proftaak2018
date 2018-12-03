@@ -65,19 +65,47 @@
                 <div class="col-md-6 text-white h-100">
 
                     <div class="v-center">
-                        <h1 class="brand">My Vending</h1>
-                        <h3 class="mb-4 section-title">Lorem ipsum dolor sit</h3>
+                        <h1 class="brand"
+                        data-sal-duration="1500"
+                        data-sal="slide-right"
+                        data-sal-delay="200"
+                        data-sal-easing="ease-out-bounce">
+                            My Vending
+                        </h1>
+                        <h3 class="mb-4 section-title"
+                        data-sal-duration="1000"
+                        data-sal="slide-right"
+                        data-sal-delay="200"
+                        data-sal-easing="ease-out-bounce">
+                            Lorem ipsum dolor sit
+                        </h3>
 
-                        <button class="mt-4 btn btn-primary">Vind Vending Machine</button>
-                        <button class="mt-4 btn btn-primary">Bekijk ons assortiment</button>
+                        <button class="mt-4 btn btn-primary"
+                        data-sal-duration="1500"
+                        data-sal="fade"
+                        data-sal-delay="500"
+                        data-sal-easing="ease-out-bounce">
+                            Vind Vending Machine
+                        </button>
+                        <button class="mt-4 btn btn-primary"
+                        data-sal-duration="1000"
+                        data-sal="fade"
+                        data-sal-delay="500"
+                        data-sal-easing="ease-out-bounce">
+                            Bekijk ons assortiment
+                        </button>
                     </div>
 
                 </div>
 
-                <div class="col-md-6 h-100" id="landing-img">
+                <div class="col-md-6 h-100" id="landing-img"
+                data-sal-duration="1500"
+                data-sal="slide-left"
+                data-sal-delay="1000"
+                data-sal-easing="ease-out-bounce">
                     <div class="v-center">
 
-                        <img src="https://i0.wp.com/www.lenprezeny.sk/wp-content/uploads/2018/01/fuzetea_sm.png" class="w-100">
+                        <img data-full-src="img/high-quality/landing-products.png" src="img/low-quality/landing-products.png" width="300px" class="landing-product lazy">
 
                     </div>
                 </div>
@@ -206,7 +234,12 @@
                 foreach ($vendingmachines as $vending) {
 
                 ?>
-                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" data-marker="<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"><?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
+                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" data-marker="<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"
+                        data-sal-duration="1500"
+                        data-sal="slide-right"
+                        data-sal-delay="<?php echo $vending['id'] * 150;?>"
+                        data-sal-easing="ease-out-bounce">
+                    <?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
 
                 <?php } ?>
                   
@@ -243,8 +276,12 @@
             ?>
 
             <div class="col-sm">
-                <div class="card text-center">
-                    <img src="<?php echo $a['img'];?>" class="about-img card-img-top m-auto">
+                <div class="card text-center"
+                        data-sal-duration="1500"
+                        data-sal="slide-up"
+                        data-sal-delay="0"
+                        data-sal-easing="ease-out-bounce">
+                    <img data-full-src="img/high-quality/about/<?php echo $a['img'];?>" src="img/low-quality/about/<?php echo $a['img'];?>" class="lazy about-img card-img-top m-auto">
                     <!-- <i class="fas fa-dog fa-4x m-auto text-primary"></i> -->
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $a['title'];?></h5>

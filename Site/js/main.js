@@ -5,7 +5,6 @@ var user = $("#mycard").data("user");
 console.log(user);
 
 $( document ).ready(function() {
-
   	sal();
 
   	removeFromCard();
@@ -14,7 +13,15 @@ $( document ).ready(function() {
 
   	alerts();
 
+  	lazyloading();
+
 });
+
+$(window).resize(function(){
+
+	
+
+})
 
 
 function removeFromCard()
@@ -232,4 +239,62 @@ function alerts()
 
 		}
 	});
+}
+
+function lazyloading()
+{
+	var lazy = [];
+
+	registerListener('load', setLazy);
+	registerListener('load', lazyLoad);
+	registerListener('scroll', lazyLoad);
+	registerListener('resize', lazyLoad);
+
+	function setLazy(){    
+	    lazy = document.getElementsByClassName('lazy');
+	    console.log('Found ' + lazy.length + ' lazy images');
+	} 
+
+	function lazyLoad(){
+	    for(var i=0; i<lazy.length; i++){
+	        if(isInViewport(lazy[i])){
+	            if (lazy[i].getAttribute('data-full-src')){
+	                lazy[i].src = lazy[i].getAttribute('data-full-src');
+	                lazy[i].removeAttribute('data-full-src');
+	            }
+	        }
+	    }
+	    
+	    cleanLazy();
+	}
+
+	function cleanLazy(){
+	    lazy = Array.prototype.filter.call(lazy, function(l){ return l.getAttribute('data-full-src');});
+	}
+
+	function isInViewport(el){
+	    var rect = el.getBoundingClientRect();
+	    
+	    return (
+	        rect.bottom >= 0 && 
+	        rect.right >= 0 && 
+	        rect.top <= (window.innerHeight + 150 || document.documentElement.clientHeight + 150) && 
+	        rect.left <= (window.innerWidth || document.documentElement.clientWidth)
+	     );
+	}
+
+	function registerListener(event, func) {
+	    if (window.addEventListener) {
+	        window.addEventListener(event, func)
+	    } else {
+	        window.attachEvent('on' + event, func)
+	    }
+	}
+
+	
+}
+
+function imgWidth(imgClass, classOfElementForWitdh)
+{
+	$(imgClass).attr("width", $(classOfElementForWitdh).width());
 }

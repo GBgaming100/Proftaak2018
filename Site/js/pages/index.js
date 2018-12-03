@@ -4,6 +4,8 @@ var catogoriesOption = [];
 
 $( document ).ready(function() {
 
+	sizeImages();
+
 	checkbox("cat-check", "All");
 
 	searchName();
@@ -20,12 +22,26 @@ $( document ).ready(function() {
   	addToCard();
 
   	gotovending();
+
 });
 
 $( window ).resize(function(){
 	checkWitdh();
 	cardHeights();
+	sizeImages();
 });
+
+$(window).load(function(){
+
+	setTimeout(function() {cardHeights(); console.log("edited")}, 20);
+
+
+})
+function sizeImages()
+{
+	imgWidth(".landing-product", "#landing-img");
+
+}
 
 function cardHeights()
 {

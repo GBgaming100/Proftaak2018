@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 
   scanner(false);
-  vendingdata("1(11,13,15,17)");
 
 });
 
@@ -13,8 +12,7 @@ function scanner(active)
     //searchers the camera input for a QR code
     scanner.addListener('scan', function (content) 
     {
-      console.log("QR code found, content: ")
-      console.log(content);
+      vendingdata(content);
 
       //checks if the content contains a website
       if(content.indexOf("https") != -1 || content.indexOf("http") != -1)
@@ -63,6 +61,10 @@ function vendingdata(value)
       value.lastIndexOf(")")
   );
 
+  var userId = value.split(")").pop();
+
+  console.log("User:" + userId);
+
   var products = [];
 
   var p = productsarray.length;
@@ -88,6 +90,8 @@ function vendingdata(value)
 
   $.each(products, function(index, value){
 
+    // voor elke position word het product er uit gehaald
+
     console.log(value);
 
     $.ajax({
@@ -99,6 +103,12 @@ function vendingdata(value)
         crossDomain: true,
 
     });
+
+    // elk product waar het postion- en user-id zijn gebruik word verwijderd uit het winkelmandje.
+
+    // geld word van rekening afgehaald
+
+    // transactie toevoegen aan transacties tabel
 
   });
 

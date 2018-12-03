@@ -138,14 +138,14 @@ function cardPay()
 			success: function(data)
 			{  
 
-				console.table(data);
+				console.log(data);
 
 				var string = "";
 
 				string = id + "(";
 				var positions = [];
 
-				$.each(data, function(index, value)
+				$.each(data['positions'], function(index, value)
 				{
 
 					positions.push(value['position']);
@@ -154,8 +154,10 @@ function cardPay()
 				string += positions;
 				string += ")";
 
+				string += data['user'];
 
-				console.log(string);
+				console.log(string)
+
 				generateQR("#testQR", string, "svg");
 			}
 		});

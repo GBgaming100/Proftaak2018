@@ -171,44 +171,7 @@ void DecodeString(String a_string){
     
 //    Block(a_blockId, a_blockStat);
   }
-
-  //checks if the string has a wisselId and a blockStatus if so calls the function Wissel()
-  if(a_string.indexOf("wisselId") != -1 && a_string.indexOf("wisselStatus")){
-    //gets the start index of the wisselId and the wisselStatus
-    int a_starWisselId = a_string.indexOf("wisselId") + 9;
-    int a_startWisselStat = a_string.indexOf("wisselStatus")+13;
-
-    //gets the information required by arduino
-    int a_wisselId = a_string.substring(a_starWisselId,a_starWisselId+1).toInt();
-    int a_wisselStat = a_string.substring(a_startWisselStat,a_startWisselStat+1).toInt();
-    
-//    Wissel(a_wisselId, a_wisselStat);
-  }
-
-  //checks if the string has the speed
-  if(a_string.indexOf("speedValue") != -1 && a_string.indexOf("speedDir") != -1){
-    //checks if there is a end character for the speed
-    if(a_string.indexOf("%21") != -1 || a_string.indexOf("!") != -1){
-      int a_startSpeed = a_string.indexOf("speedValue") + 11;
-      int a_endSpeed = 0;
-      int a_startDirection = a_string.indexOf("speedDir")+9;
-
-      //checks if the speeds end icon is URL encrypted
-      if(a_string.indexOf("%21") != -1){
-        a_endSpeed = a_string.indexOf("%21");
-      }else{
-        a_endSpeed = a_string.indexOf("!");      
-      }
   
-      //gets the information required by arduino
-      int a_speed = a_string.substring(a_startSpeed,a_endSpeed).toInt();
-      int a_direction = a_string.substring(a_startDirection,a_startDirection+1).toInt();
-      
-//      Speed(a_speed, a_direction);
-    }else{
-      SerialPrintLn("The is no ! found", false);
-    }
-  }
  
   SerialPrintLn("Received String: " + a_string, false);
   SerialPrintLn(" ", false);

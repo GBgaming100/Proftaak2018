@@ -81,42 +81,41 @@ function getCard()
 
 
 				$.each(data, function(index, value)
-				{
-					var totalPrice = 0.00;
+				{				
 
-					$.each(value['card'], function(index, value)
-					{
-						totalPrice += parseFloat(value['price']);
-					});
+					saldo(value);
 
-					console.log(totalPrice);
-
-					// $(".totalPrice").text(totalPrice);
 				});
 
-				// saldo(totalPrice);
 
 			}
 		});
 }
 
-function saldo(totalPrice)
+function saldo(value)
 {
-	var currentSaldo = $("#saldoCurrent").text();
+	var totalPrice = 0.00;
 
-	var saldoAfter = (currentSaldo - totalPrice).toFixed(2);
+	$.each(value['card'], function(index, value)
+	{
+		totalPrice += parseFloat(value['price']);
+	});
 
-	var saldoField = $("#saldoAfter");
+	console.log("Total Prince: €" + totalPrice);
+
+	$("#totalPrice-"+value['id']).text(totalPrice);
+
+	var currentSaldo = $("#saldoCurrent-"+value['id']).text();
+
+	var saldoAfter = (currentSaldo - totalPrice).toFixed(2);4
+	
+	var saldoField = $("#saldoAfter-"+value['id']);
 
 	saldoField.text(saldoAfter);
 
 	if (saldoAfter < 0) 
 	{
 		saldoField.css("color", "red");
-	}
-	else
-	{
-		saldoField.css("color", "green");
 	}
 }
 

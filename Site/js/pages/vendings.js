@@ -30,6 +30,12 @@ $( window ).resize(function(){
 	cardHeights();
 });
 
+$(window).load(function(){
+
+	setTimeout(function() {cardHeights(); console.log("edited")}, 20);
+
+})
+
 function cardHeights()
 {
 

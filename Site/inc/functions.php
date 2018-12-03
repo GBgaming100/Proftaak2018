@@ -86,6 +86,10 @@
 
 	function importHeader($scrolled)
 	{
+
+		$sql = "SELECT user_credit FROM users WHERE user_id = 5";
+		$user_credit = connectWithDatabase($sql)[0]['user_credit'];
+
 	?>
 
 	<nav class="navbar navbar-expand-lg navbar-light <?php echo $scrolled; ?>">
@@ -180,7 +184,7 @@
 			        	
 			        	<div class="col-1"></div>
 			        	<div class="col-6">Total:</div>
-			        	<div class="col-3">€<span class="totalPrice">00.00</span></div>
+			        	<div class="col-3">€<span id="totalPrice-{{id}}">0.00</span></div>
 
 			        	<div class="col-1"></div>
 			        </div>
@@ -189,7 +193,7 @@
 		        	
 			        	<div class="col-1"></div>
 			        	<div class="col-6">Mijn crediet:</div>
-			        	<div class="col-3">€<span class="saldoCurrent">5.00</span></div>
+			        	<div class="col-3">€<span id="saldoCurrent-{{id}}"><?php echo $user_credit;?></span></div>
 
 		        		<div class="col-1"></div>
 
@@ -201,7 +205,7 @@
 		        	
 			        	<div class="col-1"></div>
 			        	<div class="col-6">Saldo na betaling:</div>
-			        	<div class="col-3">€<span class="saldoAfter">10.00</span></div>
+			        	<div class="col-3">€<span id="saldoAfter-{{id}}">0.00</span></div>
 
 		        		<div class="col-1"></div>
 

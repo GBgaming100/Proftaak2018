@@ -116,6 +116,10 @@
 
     </section>
 
+    <section id="info" class="mt-4 navbar-spacer">
+
+    </section>
+
     <section class="container mt-4">
 
         <h3 class="section-title">Producten</h3>
@@ -264,8 +268,46 @@
         <hr>   
 
         <div class="row">
+            <div class="col-lg-8 mb-4" 
+                data-sal="slide-right"
+                data-sal-duration="1500"
+                data-sal-delay="0"
+                data-sal-easing="ease-out-bounce">
 
-            <?php 
+                    <img src="img/high-quality/about/vending3.jpg" class="w-100" id="about-1" alt="renegade network mta sa FiveM">
+            </div>
+            <div class="col-lg-4 mb-4" 
+                    data-sal="slide-left"
+                    data-sal-duration="1500"
+                    data-sal-delay="500"
+                    data-sal-easing="ease-out-bounce">
+
+                <i class="fas js-about-icon fa-lg text-primary" hidden></i>
+                <h2 class="main-color js-about-title">My Vending</h2>
+                <p class="js-about-text">
+                    
+                    Renegade Network is a group of gaming servers. Our aim is to bring joy to all of our players. Our objective is to give everyone a fantastic, enjoyable time. Do you like shooting? You're at the right adress! What our servers have in common:
+
+                </p>
+                <ul class="list-unstyled about-short">
+                    <?php for ($i=0; $i < 5; $i++) { ?>
+                    <li>
+                        <i class="fas fa-check text-primary"></i>
+                        Gear up and dominate the world
+
+                    </li>
+
+                <?php } ?>
+
+                </ul>
+            </div>
+            <div class="col-lg-4 mb-4" 
+                    data-sal="slide-right"
+                    data-sal-duration="1500"
+                    data-sal-delay="0"
+                    data-sal-easing="ease-out-bounce">
+
+                <?php 
 
             $sql = "SELECT * FROM about";
 
@@ -274,24 +316,26 @@
             foreach ($about as $a) {
 
             ?>
+                <div>
+                    <h4>
+                        <img src="img/low-quality/about/<?php echo $a['img'];?>" width=50 class="rounded-circle">
+                        <span class="js-about-title"><?php echo $a['title'];?></span>
+                    </h4>
+                    <p class="js-about-text">
+                        
+                        <?php echo $a['text'];?>
 
-            <div class="col-sm">
-                <div class="card text-center"
-                        data-sal-duration="1500"
-                        data-sal="slide-up"
-                        data-sal-delay="0"
-                        data-sal-easing="ease-out-bounce">
-                    <img data-full-src="img/high-quality/about/<?php echo $a['img'];?>" src="img/low-quality/about/<?php echo $a['img'];?>" class="lazy about-img card-img-top m-auto">
-                    <!-- <i class="fas fa-dog fa-4x m-auto text-primary"></i> -->
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $a['title'];?></h5>
-                        <p class="card-text"><?php echo $a['text'];?></p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+                    </p>
                 </div>
-            </div>
-
             <?php } ?>
+            </div>
+            <div class="col-lg-8 mb-4" 
+                data-sal="slide-left"
+                data-sal-duration="1500"
+                data-sal-delay="500"
+                data-sal-easing="ease-out-bounce">
+                <img src="img/high-quality/about/vending4.jpg" class="w-100" id="about-2" alt="renegade network mta sa FiveM">
+            </div>
 
         </div>
 

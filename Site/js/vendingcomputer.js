@@ -104,11 +104,38 @@ function vendingdata(value)
 
     });
 
+    // stock van product gaat omlaag
+
+    $.ajax({ 
+      type: "POST",
+      dataType: "json",
+      data:{
+        vendingId: vendingId,
+        productPosition: value
+      },
+
+      url: "inc/vending/removestock.php"
+    });
+
     // elk product waar het postion- en user-id zijn gebruik word verwijderd uit het winkelmandje.
+
+    
 
     // geld word van rekening afgehaald
 
     // transactie toevoegen aan transacties tabel
+
+    $.ajax({ 
+      type: "POST",
+      dataType: "json",
+      data:{
+        userId: userId,
+        vendingId: vendingId,
+        productPosition: value
+      },
+
+      url: "inc/user/paymoney.php"
+    });
 
   });
 

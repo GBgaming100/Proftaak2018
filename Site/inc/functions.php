@@ -124,6 +124,12 @@
             </a>
           </li>
 
+          <li class="nav-item te">
+            <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-clipboard-list"></i> Transacties
+            </a>
+          </li>
+
           <li class="nav-item mr-1">
             <a href="inc/user/signout.php" class="btn btn-primary text-white">
               <i class="fas fa-sign-out-alt"></i> Sign Out

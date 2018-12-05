@@ -2,7 +2,11 @@ body{
   font-family: 'Montserrat', sans-serif !important;
   overflow-x: hidden;
 }
-
+.thead-primary
+{
+  background: #ef4873;
+  color: white;
+}
 .list-group-item.selected
 {
   background: #ef4873 !important;

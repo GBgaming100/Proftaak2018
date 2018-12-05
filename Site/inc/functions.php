@@ -125,7 +125,7 @@
           </li>
 
           <li class="nav-item te">
-            <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link text-white" data-toggle="modal" data-target="#transactionsModal" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-clipboard-list"></i> Transacties
             </a>
           </li>
@@ -253,6 +253,53 @@
         <button type="button" class="btn btn-primary">Help</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal Transacties-->
+<div class="modal fade" id="transactionsModal" tabindex="-1" role="dialog" aria-labelledby="transactionsTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="inc/user/signin.php" method="post" class="modal-content needs-validation" novalidate>
+      <div class="modal-header">
+        <h5 class="modal-title" id="transactionsTitle">Transacties</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+          <table class="table">
+			  <thead class="thead-primary">
+			    <tr>
+			      <th scope="col"></th>
+			      <th scope="col">Product</th>
+			      <th scope="col">Prijs</th>
+			      <th scope="col">Datum</th>
+			    </tr>
+			  </thead>
+			  <tbody id="transactions">
+
+			  	<template id="transactions-template">
+			  		{{#.}}
+					    <tr>
+					      <th scope="row"><img src="{{img}}" width="30px"></th>
+					      <td>{{name}}</td>
+					      <td>{{price}}</td>
+					      <td>{{date}}</td>
+					    </tr>
+			    	{{/.}}
+				</template>
+			 
+			  </tbody>
+			</table>
+
+        </div> 
+      <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">Login</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </form>
   </div>
 </div>
 

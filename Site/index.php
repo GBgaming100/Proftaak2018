@@ -326,6 +326,9 @@
                         <?php echo $a['text'];?>
 
                     </p>
+                    <a href="<?php echo $a['facebook'];?>"><i class="fab fa-facebook-f fa-2x text-primary"></i></a>
+                    <a href="<?php echo $a['instagram'];?>"><i class="fab fa-instagram fa-2x text-primary"></i></a>
+                    <a href="<?php echo $a['linkedin'];?>"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
                 </div>
             <?php } ?>
             </div>

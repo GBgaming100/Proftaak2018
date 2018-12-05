@@ -77,7 +77,7 @@
               <div class="modal-body">
 
                 <table class="table">
-                  <thead>
+                  <thead class="thead-primary">
                     <tr>
                       <th scope="col">Position</th>
                       <th scope="col">Product</th>

@@ -15,6 +15,8 @@ $( document ).ready(function() {
 
   	lazyloading();
 
+  	transactions();
+
 });
 
 $(window).resize(function(){
@@ -31,7 +33,7 @@ function removeFromCard()
 
 		var id = $(this).data("product");
 
-		console.log(id);
+		// console.log(id);
 
 		$.ajax({ 
 			type: "POST",
@@ -101,7 +103,7 @@ function saldo(value)
 		totalPrice += parseFloat(value['price']);
 	});
 
-	console.log("Total Prince: €" + totalPrice);
+	// console.log("Total Prince: €" + totalPrice);
 
 	$("#totalPrice-"+value['id']).text(totalPrice);
 
@@ -138,7 +140,7 @@ function cardPay()
 			success: function(data)
 			{  
 
-				console.log(data);
+				// console.log(data);
 
 				var string = "";
 
@@ -156,7 +158,7 @@ function cardPay()
 
 				string += data['user'];
 
-				console.log(string)
+				// console.log(string)
 
 				generateQR("#testQR", string, "svg");
 			}
@@ -253,7 +255,7 @@ function lazyloading()
 
 	function setLazy(){    
 	    lazy = document.getElementsByClassName('lazy');
-	    console.log('Found ' + lazy.length + ' lazy images');
+	    // console.log('Found ' + lazy.length + ' lazy images');
 	} 
 
 	function lazyLoad(){
@@ -298,4 +300,25 @@ function lazyloading()
 function imgWidth(imgClass, classOfElementForWitdh)
 {
 	$(imgClass).attr("width", $(classOfElementForWitdh).width());
+}
+
+function transactions()
+{
+	console.log("transactions ready");
+	$.ajax({ 
+			type: "POST",
+			dataType: "json",
+			data:{
+				userId: user
+			},
+
+			url: "inc/user/gettransactions.php",
+
+			success: function(data)
+			{  
+
+				mustache(data, "#transactions-template", "#transactions");
+
+			}
+		});
 }

@@ -33,11 +33,11 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(doRow3Mboo,HIGH);
-  digitalWrite(doColum4Mboo,HIGH);
+  digitalWrite(doRow1Mboo,HIGH);
+  digitalWrite(doColum1Mboo,HIGH);
   delay(2850);
-  digitalWrite(doRow3Mboo,LOW);
-  digitalWrite(doColum4Mboo,LOW);
+  digitalWrite(doRow1Mboo,LOW);
+  digitalWrite(doColum1Mboo,LOW);
   delay(2850);
 }
 

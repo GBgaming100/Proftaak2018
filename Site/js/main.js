@@ -5,6 +5,7 @@ var user = $("#mycard").data("user");
 console.log(user);
 
 $( document ).ready(function() {
+	navbarSpacer();
   	sal();
 
   	removeFromCard();
@@ -16,7 +17,6 @@ $( document ).ready(function() {
   	lazyloading();
 
   	transactions();
-
 });
 
 $(window).resize(function(){
@@ -157,8 +157,14 @@ function cardPay()
 				string += ")";
 
 				string += data['user'];
+				string += ",";
 
-				// console.log(string)
+				var now = new Date();
+    			var timenow = now.getTime();
+
+				string += timenow;
+
+				console.log(string);
 
 				generateQR("#testQR", string, "svg");
 			}
@@ -321,4 +327,10 @@ function transactions()
 
 			}
 		});
+}
+
+function navbarSpacer()
+{
+	var spacer = $(".navbar-spacer");
+	$(".navbar-spacer").css("margin-top", ( $(".navbar").height() + 30 ) + "px");
 }

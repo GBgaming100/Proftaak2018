@@ -13,8 +13,6 @@ $( document ).ready(function() {
   	catergoryfilter();
   	getproducts();
 
-	checkWitdh();
-
 	loadCF();
 
 	flipCards();
@@ -33,7 +31,7 @@ $( window ).resize(function(){
 
 $(window).load(function(){
 
-	setTimeout(function() {cardHeights(); console.log("edited")}, 20);
+	setTimeout(function() {cardHeights(); checkWitdh(); console.log("edited")}, 20);
 
 
 })

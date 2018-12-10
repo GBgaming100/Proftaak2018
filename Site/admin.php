@@ -33,7 +33,7 @@
 
     <?php importHeader("") ?>
 
-    <section class="container mt-4">
+    <section class="container navbar-spacer">
 
         <h3 class="section-title">Vendingmachines</h3>
         <hr>   

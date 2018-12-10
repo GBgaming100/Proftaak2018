@@ -39,7 +39,7 @@
 
     <?php importHeader("") ?>
 
-    <section class="container mt-4">
+    <section class="container navbar-spacer">
 
         <ol class="breadcrumb bg-transparent">
             <li class="breadcrumb-item text-primary"><a href="#">Home</a></li>
@@ -164,4 +164,5 @@
     ?>
 
     <script src="js/pages/vendings.js"></script>
+    
 </html>

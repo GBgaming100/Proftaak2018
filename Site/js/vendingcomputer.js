@@ -54,89 +54,111 @@ function scanner(active)
 
 function vendingdata(value)
 {
-  var vendingId = value.substr(0, value.indexOf('(')); 
+  console.log(value);
+  
+  var Time_out = value.split(",").pop();
 
-  var productsarray = value.substring(
-      value.lastIndexOf("(") + 1, 
-      value.lastIndexOf(")")
-  );
+  var now = new Date();
+  var timenow = now.getTime();
 
-  var userId = value.split(")").pop();
+  console.log(timenow - Time_out);
 
-  console.log("User:" + userId);
+  if((timenow - Time_out) < 300000)
+  {
+    console.log(Time_out);
 
-  var products = [];
+    var vendingId = value.substr(0, value.indexOf('(')); 
 
-  var p = productsarray.length;
-  var number = "";
+    var productsarray = value.substring(
+        value.lastIndexOf("(") + 1, 
+        value.lastIndexOf(")")
+    );
+    console.log("productsarray:" + productsarray);
 
-  for (p = 0; p < productsarray.length; p++) { 
+    var userId = value.substring(
+        value.lastIndexOf(")") + 1, 
+        value.lastIndexOf(",")
+    );;
 
-    if (productsarray.charAt(p) == ",") 
-    {
-      products.push(number);
-      number = "";
+    console.log("User:" + userId);
+
+    var products = [];
+
+    var p = productsarray.length;
+    var number = "";
+
+    for (p = 0; p < productsarray.length; p++) { 
+
+      if (productsarray.charAt(p) == ",") 
+      {
+        products.push(number);
+        number = "";
+      }
+      else
+      {
+        number += productsarray.charAt(p);
+      }
     }
-    else
-    {
-      number += productsarray.charAt(p);
-    }
-  }
 
-  products.push(number);
-  number = "";
+    products.push(number);
+    number = "";
 
-  console.table(products);
+    console.table(products);
 
-  $.each(products, function(index, value){
+    $.each(products, function(index, value){
 
-    // voor elke position word het product er uit gehaald
+      // voor elke position word het product er uit gehaald
 
-    console.log(value);
+      console.log(value);
 
-    $.ajax({
-        url: "http://192.168.0.40/", //IP of Arduino
+      $.ajax({
+          url: "http://192.168.0.40/", //IP of Arduino
+          type: "POST",
+          data: {$vendingId: vendingId, productPosition: value+"@"},
+          dataType: 'jsonp',
+          contentType: 'application/json',
+          crossDomain: true,
+
+      });
+
+      // stock van product gaat omlaag
+
+      $.ajax({ 
         type: "POST",
-        data: {$vendingId: vendingId, productPosition: value+"@"},
-        dataType: 'jsonp',
-        contentType: 'application/json',
-        crossDomain: true,
+        dataType: "json",
+        data:{
+          vendingId: vendingId,
+          productPosition: value
+        },
+
+        url: "inc/vending/removestock.php"
+      });
+
+      // elk product waar het postion- en user-id zijn gebruik word verwijderd uit het winkelmandje.
+
+      
+
+      // geld word van rekening afgehaald
+
+      // transactie toevoegen aan transacties tabel
+
+      $.ajax({ 
+        type: "POST",
+        dataType: "json",
+        data:{
+          userId: userId,
+          vendingId: vendingId,
+          productPosition: value
+        },
+
+        url: "inc/user/paymoney.php"
+      });
 
     });
-
-    // stock van product gaat omlaag
-
-    $.ajax({ 
-      type: "POST",
-      dataType: "json",
-      data:{
-        vendingId: vendingId,
-        productPosition: value
-      },
-
-      url: "inc/vending/removestock.php"
-    });
-
-    // elk product waar het postion- en user-id zijn gebruik word verwijderd uit het winkelmandje.
-
-    
-
-    // geld word van rekening afgehaald
-
-    // transactie toevoegen aan transacties tabel
-
-    $.ajax({ 
-      type: "POST",
-      dataType: "json",
-      data:{
-        userId: userId,
-        vendingId: vendingId,
-        productPosition: value
-      },
-
-      url: "inc/user/paymoney.php"
-    });
-
-  });
+  }
+  else
+  {
+    console.log("Code is too old!");
+  }
 
 }

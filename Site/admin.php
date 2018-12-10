@@ -82,7 +82,7 @@
                       <th scope="col">Position</th>
                       <th scope="col">Product</th>
                       <th scope="col">Stock</th>
-                      <!-- <th scope="col">Size</th> -->
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody id="vending-machine">
@@ -101,10 +101,47 @@
                           {{/product_other}}
                         </select>
                       </td>
-                      <td><input type="number" name="stock" value="{{stock}}" style="width: 60px;"></td>
-                      <!-- <td>medium</td> -->
+                      <td>
+                        <input type="number" name="stock" value="{{stock}}" style="width: 60px;">
+                      </td>
+                      <td>
+                        <button class="btn btn-delete-row btn-danger" value="{{product_id}}"><i class="fas fa-minus-circle"></i></button>
+                      </td>
                     </tr>
                     {{/.}}
+
+                    <tr>
+                      <th scope="row">
+                      <input type="number" name="position" style="width: 60px;">
+                        </th>
+                      <td>
+
+                        <select>
+
+                           <?php
+
+                            $sql = "SELECT id, name FROM products";
+
+                            $products = connectWithDatabase($sql);
+
+                            foreach ($products as $product) {
+
+                            ?>
+
+                            <option value="<?php echo $product['id'] ?>"><?php echo $product['name'] ?></option>
+
+                          <?php } ?>
+                        </select>
+
+                        
+
+                      </td>
+                      <td>
+                        <input type="number" name="stock" value="0" style="width: 60px;">
+                      </td>
+                      <td></td>
+                    </tr>
+
                     </template>
 
                   </tbody>
@@ -223,5 +260,11 @@
             });
 
         });
+
+        $("body").on("click", ".btn-delete-row", function(){
+          var id = $(this).val();
+
+          console.log("delete : " + id);
+        })
                 </script>
 </html>

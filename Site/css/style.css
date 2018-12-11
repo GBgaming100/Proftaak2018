@@ -342,3 +342,8 @@ input[type='checkbox'] + .checkbox, input[type='radio'] + .checkbox {
 .active{
   background:   #ef4873 !important;
 }
+
+#testQR div
+{
+  transform: scaleX(-1);
+}

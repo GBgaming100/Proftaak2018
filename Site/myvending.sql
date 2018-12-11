@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 dec 2018 om 13:32
+-- Gegenereerd op: 11 dec 2018 om 11:23
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.2.12
 
@@ -162,7 +162,18 @@ INSERT INTO `transactions` (`id`, `user_id`, `price`, `date`, `product_id`) VALU
 (5, 5, '1.00', '2018-12-05 10:33:52', 6),
 (6, 5, '1.00', '2018-12-05 12:29:08', 6),
 (7, 5, '1.00', '2018-12-05 12:29:58', 4),
-(8, 5, '1.00', '2018-12-05 12:29:58', 6);
+(8, 5, '1.00', '2018-12-05 12:29:58', 6),
+(9, 5, '1.00', '2018-12-07 08:26:38', 6),
+(10, 5, '1.00', '2018-12-07 08:28:12', 6),
+(11, 5, '1.00', '2018-12-07 08:29:05', 6),
+(12, 5, '1.00', '2018-12-07 08:30:08', 6),
+(13, 5, '1.00', '2018-12-07 08:30:39', 6),
+(14, 5, '1.00', '2018-12-07 08:31:27', 6),
+(15, 5, '1.00', '2018-12-07 08:32:28', 6),
+(16, 5, '1.00', '2018-12-07 08:32:55', 6),
+(17, 5, '1.00', '2018-12-07 08:33:28', 6),
+(18, 5, '1.00', '2018-12-07 08:33:49', 6),
+(19, 5, '1.00', '2018-12-07 08:37:20', 6);
 
 -- --------------------------------------------------------
 
@@ -185,7 +196,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_email`, `user_rank`, `user_forgotpasscode`, `user_credit`) VALUES
-(5, 'maarten', '005147622d52a589c71d48564cabc35e', 'maarten.jakobs@gmail.com', 0, '', '76.00');
+(5, 'maarten', '005147622d52a589c71d48564cabc35e', 'maarten.jakobs@gmail.com', 0, '', '59.00');
 
 -- --------------------------------------------------------
 
@@ -210,7 +221,7 @@ INSERT INTO `vendingassortiment` (`id`, `machine_id`, `product_id`, `position`, 
 (2, 1, 2, 13, 10),
 (3, 1, 3, 15, 10),
 (4, 1, 4, 17, 9),
-(5, 1, 6, 42, -6);
+(5, 1, 6, 42, -18);
 
 -- --------------------------------------------------------
 
@@ -329,7 +340,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT voor een tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`

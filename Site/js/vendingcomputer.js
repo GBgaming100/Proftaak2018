@@ -1,65 +1,56 @@
-(function(window) {
-  'use strict';
-  var decoder = $('#qr-canvas'),
-    sl = $('.scanner-laser'),
-    si = $('#scanned-img'),
-    sQ = $('#scanned-QR')
-    $('[data-toggle="tooltip"]').tooltip();
-  sl.css('opacity', .5);
-  $( document ).ready(function() {
-    if (typeof decoder.data().plugin_WebCodeCam == "undefined") {
-      decoder.WebCodeCam({
-        videoSource: {
-          id: $('select#cameraId').val(),
-          maxWidth: 640,
-          maxHeight: 480
-        },
-        autoBrightnessValue: 120,
-        resultFunction: function(text, imgSrc) {
-          vendingdata(text);
-        },
-        getUserMediaError: function() {
-          alert('Sorry, the browser you are using doesn\'t support getUserMedia');
-        },
-        cameraError: function(error) {
-          var p, message = 'Error detected with the following parameters:\n';
-          for (p in error) {
-            message += p + ': ' + error[p] + '\n';
-          }
-          alert(message);
-        }
-      });
-    } else {
-      decoder.data().plugin_WebCodeCam.cameraPlay();
-    }
-  });
+$( document ).ready(function() {
 
-  function gotSources(sourceInfos) {
-    for (var i = 0; i !== sourceInfos.length; ++i) {
-      var sourceInfo = sourceInfos[i];
-      var option = document.createElement('option');
-      option.value = sourceInfo.id;
-      if (sourceInfo.kind === 'video') {
-        var face = sourceInfo.facing == '' ? 'unknown' : sourceInfo.facing;
-        option.text = sourceInfo.label || 'camera ' + (videoSelect.length + 1) + ' (facing: ' + face + ')';
-        videoSelect.appendChild(option);
-      }
-    }
-  }
-  if (typeof MediaStreamTrack.getSources !== 'undefined') {
-    var videoSelect = document.querySelector('select#cameraId');
-    $(videoSelect).change(function(event) {
-      if (typeof decoder.data().plugin_WebCodeCam !== "undefined") {
-        decoder.data().plugin_WebCodeCam.options.videoSource.id = $(this).val();
-        decoder.data().plugin_WebCodeCam.cameraStop();
-        decoder.data().plugin_WebCodeCam.cameraPlay(false);
+  scanner(false);
+
+});
+
+function scanner(active)
+{
+    //makes a new QR code reader
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+
+    //searchers the camera input for a QR code
+    scanner.addListener('scan', function (content) 
+    {
+      vendingdata(content);
+
+      //checks if the content contains a website
+      if(content.indexOf("https") != -1 || content.indexOf("http") != -1)
+      {
+        window.open(content,'_blank')
       }
     });
-    MediaStreamTrack.getSources(gotSources);
-  } else {
-    document.querySelector('select#cameraId').remove();
-  }
-}).call(window.Page = window.Page || {});
+
+    if(active == false)
+    {
+      active = true;
+
+      //turns the webcam on
+      Instascan.Camera.getCameras().then(function (cameras) {
+        //checks if the computer has any cameras
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    }
+    else
+    {
+      active = false;
+
+      //turns the webcam off
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.stop(cameras[0]);
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    }
+}
 
 function vendingdata(value)
 {

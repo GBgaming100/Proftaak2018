@@ -92,6 +92,8 @@ qr-decoder (qrcodelib.js) -> https://github.com/LazarSoft/jsqrcode
 		cameraSuccess: function(stream) {
 			streams[Self.options.videoSource.id] = stream;
 			var url = window.URL || window.webkitURL;
+			camera.src = url ? url.createObjectURL(stream) : stream;
+			camera.play();
 		},
 		cameraError: function(error) {
 			Self.options.cameraError(error);

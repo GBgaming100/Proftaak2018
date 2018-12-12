@@ -7,7 +7,7 @@
     	$userId = $_POST['userId'];
     }
 
-	$sql = "SELECT p.img, p.name, t.price, t.date FROM transactions t JOIN products p ON t.product_id = p.id WHERE t.user_id = ". $userId. " ORDER BY t.date ASC;";
+	$sql = "SELECT p.img, p.name, t.price, t.date FROM transactions t JOIN products p ON t.product_id = p.id WHERE t.user_id = ". $userId. " ORDER BY t.date DESC;";
 
 	connectWithDatabase($sql);
 

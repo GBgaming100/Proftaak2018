@@ -79,17 +79,17 @@
                 <table class="table">
                   <thead class="thead-primary">
                     <tr>
-                      <th scope="col">Position</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Stock</th>
-                      <!-- <th scope="col">Size</th> -->
+                      <th scope="col" data-toggle="tooltip" data-placement="top" title="Position of vendingmachine">Position</th>
+                      <th scope="col" data-toggle="tooltip" data-placement="top" title="Product on the position">Product</th>
+                      <th scope="col" data-toggle="tooltip" data-placement="top" title="The current stock">Stock</th>
+                      <th scope="col" data-toggle="tooltip" data-placement="top" title="Delete Row"></th>
                     </tr>
                   </thead>
                   <tbody id="vending-machine">
                     <template id="vending-machine-template">
 
                     {{#.}}
-                    <tr>
+                    <tr class="update-row">
                       <th scope="row">
                       <input type="number" name="position" value="{{position}}" style="width: 60px;">
                         </th>
@@ -102,9 +102,33 @@
                         </select>
                       </td>
                       <td><input type="number" name="stock" value="{{stock}}" style="width: 60px;"></td>
-                      <!-- <td>medium</td> -->
+                      <td>
+                        <button class="btn btn-delete-donate btn-danger" value="{{product_id}}"><i class="fas fa-minus-circle"></i></button>
+                      </td>
                     </tr>
                     {{/.}}
+
+                    <tr class="insert-row bg-light add-product">
+                      <th scope="row">
+                      <input type="number" name="position" style="width: 60px;">
+                        </th>
+                      <td>
+                        <select>
+                          <?php
+
+                          $sql = "SELECT id, name FROM products";
+
+                          foreach(connectWithDatabase($sql) as $product){;
+
+                          ?>
+                            <option value="<?php echo $product['id'] ?>"><?php echo $product['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </td>
+                      <td><input type="number" name="stock" value="0" style="width: 60px;"></td>
+                      <td></td>
+                    </tr>
+
                     </template>
 
                   </tbody>
@@ -113,6 +137,7 @@
 
               </div>
               <div class="modal-footer">
+                <button type="button" class="btn btn-save btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -223,5 +248,60 @@
             });
 
         });
+
+        $("table").on('input', ".add-product input", function()
+        {
+          var oldVal = $(this).val();
+
+          console.log(oldVal)
+
+          $(this).val("");
+
+          var input = $(this).closest("tr").clone();
+
+          $(this).val(oldVal);
+
+          var inputval = $(this).val();
+
+          $(this).closest("tr").next().remove();
+
+          if (inputval != "") 
+          {
+
+            $(input).find("input").val("");
+            $(this).closest( "table" ).append(input);
+
+          }
+        });
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $(".btn-save").on("click", function(){
+          $(".update-row").each(function(index, value)
+          {
+            var position =      $(value).find("input[name='position']").val();
+            var product_id =    $(value).find("select").val();
+            var stock =         $(value).find("input[name='stock']").val();
+
+            console.log("position: " + position);
+            console.log("product: " + product_id);
+            console.log("stock: " + stock);
+
+
+          })
+
+          $(".insert-row").each(function(index, value)
+          {
+            var position =      $(value).find("input[name='position']").val();
+            var product_id =    $(value).find("select").val();
+            var stock =         $(value).find("input[name='stock']").val();
+
+            console.log("position: " + position);
+            console.log("product: " + product_id);
+            console.log("stock: " + stock);
+          })
+        })
                 </script>
 </html>

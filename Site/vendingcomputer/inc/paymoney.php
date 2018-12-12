@@ -1,5 +1,5 @@
 <?php
-    include("../functions.php");
+    include("../../inc/functions.php");
 
     $userId = $_POST['userId'];
 	$vendingId = $_POST['vendingId'];

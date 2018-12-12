@@ -167,6 +167,8 @@ function vendingdata(value)
 
             $.each(products, function (index, value) {
 
+                console.log(vendingId + " | " + value);
+
                 // voor elke position word het product er uit gehaald
 
                 console.log(value);
@@ -191,7 +193,7 @@ function vendingdata(value)
                         productPosition: value
                     },
 
-                    url: "inc/vending/removestock.php"
+                    url: "inc/removestock.php"
                 });
 
                 // elk product waar het postion- en user-id zijn gebruik word verwijderd uit het winkelmandje.
@@ -210,7 +212,7 @@ function vendingdata(value)
                         productPosition: value
                     },
 
-                    url: "inc/user/paymoney.php"
+                    url: "inc/paymoney.php"
                 });
 
             });

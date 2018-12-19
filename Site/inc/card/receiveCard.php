@@ -12,16 +12,15 @@
 
         $ids = connectWithDatabase($sql);
 
-        $idArray = [];
+        $cardItems = [];
 
         foreach ($ids as $id) 
         {
-            array_push($idArray, $id['product_id']);
+
+            $sql = "SELECT c.id as id, p.name as name, p.price as price, p.img as img FROM products p JOIN mycard c ON p.id = c.product_id WHERE p.id = ". $id['product_id'];
+
+            array_push($cardItems, connectWithDatabase($sql)[0]);
         }
-
-        $sql = "SELECT * FROM products WHERE id in(". implode(", ",$idArray) .")";
-
-        $cardItems = connectWithDatabase($sql);
 
         $vendingmachines[$key]['card'] = $cardItems;
 

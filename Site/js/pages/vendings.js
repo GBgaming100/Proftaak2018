@@ -50,23 +50,25 @@ function flipCards()
 {
 	$("body").on("click", ".price-container", function()
     {
+    	if ( !$( this ).hasClass( "out-of-stock" ) )
+    	{
+	    	var turnedCard = this;
+	        $(turnedCard).find('.card--front').toggleClass('card--front--flip');
+	        $(turnedCard).find('.card--back').toggleClass('card--back--flip');
 
-    	var turnedCard = this;
-        $(turnedCard).find('.card--front').toggleClass('card--front--flip');
-        $(turnedCard).find('.card--back').toggleClass('card--back--flip');
 
+	        $(".price-container").each(function()
+	        {
+	        	if (this != turnedCard) 
+	        	{
 
-        $(".price-container").each(function()
-        {
-        	if (this != turnedCard) 
-        	{
+	        			$(this).find('.card--front').removeClass('card--front--flip');
 
-        			$(this).find('.card--front').removeClass('card--front--flip');
+	    				$(this).find('.card--back').removeClass('card--back--flip');
 
-    				$(this).find('.card--back').removeClass('card--back--flip');
-
-        	}
-        });
+	        	}
+	        });
+	    }
     });
 }
 
@@ -214,6 +216,16 @@ function getproducts()
 			success: function(data)
 			{  
 
+				$.each(data, function(i, v){
+					if (v['stock'] == 0) 
+					{
+						data[i]['stockclass'] = "out-of-stock";
+					}
+					else
+					{
+						data[i]['stockclass'] = "";
+					}
+				})
 				mustache(data, "#products-templates", "#products");
 
 				cardHeights();

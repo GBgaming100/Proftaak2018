@@ -308,6 +308,10 @@ function imgWidth(imgClass, classOfElementForWitdh)
 	$(imgClass).attr("width", $(classOfElementForWitdh).width());
 }
 
+
+var totalShown = 5;
+var expandWith = 5;
+var maxAmount = 0;
 function transactions()
 {
 	console.log("transactions ready");
@@ -322,12 +326,25 @@ function transactions()
 
 			success: function(data)
 			{  
-
+				$.each(data, function(index){
+					maxAmount++;
+				})
+				data = data.slice(0, totalShown);
 				mustache(data, "#transactions-template", "#transactions");
 
 			}
 		});
 }
+
+$(".btn-loadmore").on("click", function(){
+		console.log(maxAmount)
+		
+		if (totalShown + expandWith < maxAmount) {
+			totalShown += expandWith;
+		}
+
+		transactions()
+	});
 
 function navbarSpacer()
 {

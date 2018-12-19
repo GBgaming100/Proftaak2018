@@ -42,8 +42,8 @@
     <section class="container navbar-spacer">
 
         <ol class="breadcrumb bg-transparent">
-            <li class="breadcrumb-item text-primary"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?php echo $product['name']; ?></li>
+            <li class="breadcrumb-item text-primary"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item current" aria-current="page"><?php echo $product['name']; ?></li>
         </ol>   
 
         <div class="row">

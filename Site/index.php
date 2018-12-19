@@ -77,7 +77,7 @@
                         data-sal="slide-right"
                         data-sal-delay="200"
                         data-sal-easing="ease-out-bounce">
-                            Lorem ipsum dolor sit
+                            School project ROC ter-AA
                         </h3>
 
                         <button class="mt-4 btn btn-primary"

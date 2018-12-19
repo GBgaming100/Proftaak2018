@@ -295,7 +295,7 @@
 
         </div> 
       <div class="modal-footer">
-         <button type="submit" class="btn btn-primary">Login</button>
+         <button type="button" class="btn btn-secondary btn-loadmore">Laad 5 meer</button>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

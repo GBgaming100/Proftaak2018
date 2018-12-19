@@ -91,6 +91,8 @@
                     {{#.}}
                     <tr class="update-row">
                       <th scope="row">
+
+                      <input type="number" name="id" value="{{vendingassortiment_id}}" style="display: none;">
                       <input type="number" name="position" value="{{position}}" style="width: 60px;">
                         </th>
                       <td>
@@ -103,13 +105,15 @@
                       </td>
                       <td><input type="number" name="stock" value="{{stock}}" style="width: 60px;"></td>
                       <td>
-                        <button class="btn btn-delete-donate btn-danger" value="{{product_id}}"><i class="fas fa-minus-circle"></i></button>
+                        <button class="btn bnt-delete-item btn-danger" value="{{vendingassortiment_id}}"><i class="fas fa-minus-circle"></i></button>
                       </td>
                     </tr>
                     {{/.}}
 
                     <tr class="insert-row bg-light add-product">
                       <th scope="row">
+
+                      <input type="number" class="machineId" name="machineId" value="{{id}}" style="display: none;">
                       <input type="number" name="position" style="width: 60px;">
                         </th>
                       <td>
@@ -137,12 +141,88 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-save btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-save btn-secondary" data-dismiss="modal">Opslaan <i class="fas fa-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren <i class="fas fa-times-circle"></i></button>
               </div>
             </div>
           </div>
         </div>
+
+        <h3 class="section-title">Producten</h3>
+        <hr>
+
+        <table class="table">
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"></th>
+              <th scope="col">Naam</th>
+              <th scope="col">Prijs</th>
+              <th scope="col">Achtergrondkleur</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="products">
+            <template id="products-template">
+
+            {{#.}}
+            <tr class="update-product-row">
+              <th scope="row" class="product-id">{{id}}</th>
+              <td>
+                <img src="{{img}}" width="50px;" style="background: {{background}};" class="rounded-circle product-img" data-toggle="modal" data-target="#productimgModal">
+              </td>
+              <td><input type="text" value="{{name}}" class="product-name-input w-100"></td>
+              <td>€<input type="decimal" value="{{price}}" class="product-price" style="width: 75px;"></td>
+              <td>
+                <input type="color" value="{{background}}" class="color-selector">
+                <input type="text" value="{{background}}" class="color-text">
+              </td>
+              <td>
+                <button class="btn bnt-delete-product btn-danger" value="{{id}}"><i class="fas fa-minus-circle"></i></button>
+              </td>
+            </tr>
+
+            {{/.}}
+            <tr class="insert-product-row bg-light">
+              <th scope="row" class="product-id">80</th>
+              <td>
+                <img src="https://static-images.jumbo.com/product_images/492100FLS-1_360x360.png" width="50px;" class="rounded-circle product-img" data-toggle="modal" data-target="#productimgModal">
+              </td>
+              <td><input type="text" class="product-name-input w-100"></td>
+              <td>€<input type="decimal" class="product-price" style="width: 75px;"></td>
+              <td>
+                <input type="color" class="color-selector">
+                <input type="text" class="color-text">
+              </td>
+              <td></td>
+            </tr>
+            </template>
+          </tbody>
+        </table>
+
+        <div class="modal fade" id="productimgModal" tabindex="-1" role="dialog" aria-labelledby="productimgModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="productimgModalLabel">Verander afbeeling</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input type="url" value="URL" class="imgUrl-input w-100">
+
+                <img src="nothing" class="imgUrl-img">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-change-product-img btn-secondary" data-dismiss="modal">Opslaan <i class="fas fa-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren <i class="fas fa-times-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn bnt-save-product btn-secondary" value="<?php echo $p['id'] ?>">Opslaan <i class="fas fa-save"></i></button>
 
     </section>
 
@@ -155,153 +235,5 @@
 
     ?>
 
-    <!-- <script src="js/pages/admin.js"></script> -->
-
-    <script>
-        var markers = [];
-
-        var map = L.map('map').setView([52.092876, 5.104480], 7);
-
-        var myIcon = L.icon({
-            iconUrl: 'img/marker.png',
-            iconSize: [38, 38],
-            iconAnchor: [22, 22],
-            popupAnchor: [-3, -76]
-        });
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">Maarten & Max</a> Developers'
-        }).addTo(map);
-
-        $.ajax({ 
-            type: "GET",
-            dataType: "json",
-            url: "inc/map/getmapdata.php",
-
-            success: function(data)
-            {  
-
-                $.each(data, function(index, value){
-
-                    var marker = L.marker([value['lat'], value['long']], {icon: myIcon}).addTo(map)
-                    .bindPopup(value['name']+'.<br> <a class="view-vending" data-toggle="modal" data-target="#exampleModal" data-vending="'+value['id']+'">Beijk Voorraad</a>.');
-
-                    marker["id"]=value['id'];
-                    marker["lat"]=value['lat'];
-                    marker["long"]=value['long'];
-                    markers.push(marker);
-
-                });
-                console.table(markers)
-            }
-        });
-
-        map.on('popupclose', function(e) {
-            $(".dblVending").removeClass("active");
-        });
-
-        $(".dblVending").on("click", function(){
-
-
-            markerId = $(this).data('marker');
-
-            $(".dblVending").removeClass("active");
-
-            $.each(markers, function(index, value){
-
-                if (value['id'] == markerId) 
-                {
-                    value.openPopup();
-
-                    map.setView([value['lat'], value['long']], 15);
-
-
-                }
-
-            })
-
-            $(this).addClass( "active" );
-
-        }); 
-
-        $("body").on("click", ".view-vending", function(){
-            id = $(this).data("vending");
-
-            console.log(id);
-
-             $.ajax({ 
-                type: "POST",
-                dataType: "json",
-                data:{id: id},
-                url: "inc/admin/getstock.php",
-
-                success: function(data)
-                {  
-
-                    $(".vending-name").text(data[0]['vending_name']);
-
-                    mustache(data, "#vending-machine-template", "#vending-machine");
-
-                    console.table(data);
-
-                }
-            });
-
-        });
-
-        $("table").on('input', ".add-product input", function()
-        {
-          var oldVal = $(this).val();
-
-          console.log(oldVal)
-
-          $(this).val("");
-
-          var input = $(this).closest("tr").clone();
-
-          $(this).val(oldVal);
-
-          var inputval = $(this).val();
-
-          $(this).closest("tr").next().remove();
-
-          if (inputval != "") 
-          {
-
-            $(input).find("input").val("");
-            $(this).closest( "table" ).append(input);
-
-          }
-        });
-
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        });
-
-        $(".btn-save").on("click", function(){
-          $(".update-row").each(function(index, value)
-          {
-            var position =      $(value).find("input[name='position']").val();
-            var product_id =    $(value).find("select").val();
-            var stock =         $(value).find("input[name='stock']").val();
-
-            console.log("position: " + position);
-            console.log("product: " + product_id);
-            console.log("stock: " + stock);
-
-
-          })
-
-          $(".insert-row").each(function(index, value)
-          {
-            var position =      $(value).find("input[name='position']").val();
-            var product_id =    $(value).find("select").val();
-            var stock =         $(value).find("input[name='stock']").val();
-
-            console.log("position: " + position);
-            console.log("product: " + product_id);
-            console.log("stock: " + stock);
-          })
-        })
-                </script>
+    <script src="js/pages/admin.js"></script>
 </html>

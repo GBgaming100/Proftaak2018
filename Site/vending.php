@@ -42,9 +42,8 @@
     <section class="container navbar-spacer">
 
         <ol class="breadcrumb bg-transparent">
-            <li class="breadcrumb-item text-primary"><a href="#">Home</a></li>
-            <li class="breadcrumb-item text-primary"><a href="#">Locaties</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?php echo($name); ?></li>
+            <li class="breadcrumb-item text-primary"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item current" aria-current="page"><?php echo($name); ?></li>
         </ol>
 
         <h3>Locatie: <?php echo($name); ?></h3>
@@ -132,7 +131,7 @@
             <template id="products-templates">
                 {{#.}}
 
-                <div class="col-lg-3 position-relative price-container">   
+                <div class="col-lg-3 position-relative price-container {{stockclass}}">   
                     <div class="card card--front position-absolute" style="background: {{background}}">
                       <img class="card-img-top" src="{{img}}" alt="Card image cap">
                       <h4 class="pricetag">€{{price}}</h4>
@@ -143,9 +142,18 @@
 
                       <h3 class="text-white">€{{price}}</h3>
 
+                      <?php if (!isset($_SESSION["user"])) { ?>
+
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                      </button>
+                      <?php }else{ ?>
+
                       <button class="btn btn-primary btn-addToCard" value="{{id}}" data-machine="<?php echo($id); ?>" data-user="<?php echo($_SESSION['id']); ?>">
                         <i class="fas fa-cart-plus"></i> Add to Card
                       </button>
+
+                      <?php } ?>
                     </div>
                 </div>
 

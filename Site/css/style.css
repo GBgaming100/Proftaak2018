@@ -2,6 +2,11 @@ body{
   font-family: 'Montserrat', sans-serif !important;
   overflow-x: hidden;
 }
+
+a {
+    color: #ef4873;
+}
+
 .thead-primary
 {
   background: #ef4873;

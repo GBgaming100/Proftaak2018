@@ -9,7 +9,7 @@ if (isset($_POST['id'])) {
 }
 
 
-$sql = "SELECT m.id, m.name as vending_name, a.position, a.stock, p.id as product_id, p.name as product_name FROM `vendingassortiment` a JOIN vendingmachines m ON a.`machine_id` = m.id JOIN products p ON a.product_id = p.id WHERE m.id = ".$id;
+$sql = "SELECT m.id, m.name as vending_name, a.id as vendingassortiment_id, a.position, a.stock, p.id as product_id, p.name as product_name FROM `vendingassortiment` a JOIN vendingmachines m ON a.`machine_id` = m.id JOIN products p ON a.product_id = p.id WHERE m.id = ".$id;
 
 $machines = connectWithDatabase($sql);
 

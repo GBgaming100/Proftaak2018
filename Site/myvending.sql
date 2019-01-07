@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 11 dec 2018 om 11:32
+-- Gegenereerd op: 07 jan 2019 om 12:07
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.2.12
 
@@ -108,9 +108,7 @@ CREATE TABLE `mycard` (
 --
 
 INSERT INTO `mycard` (`id`, `user_id`, `product_id`, `vending_id`) VALUES
-(63, 0, 3, 1),
-(67, 0, 2, 1),
-(68, 0, 3, 1);
+(105, 5, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -134,9 +132,9 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `price`, `img`, `background`, `cat_id`) VALUES
 (1, 'Red Bull The Blue Edition', '1.99', 'https://static-images.jumbo.com/product_images/126884BLK-1_360x360.png', '#4b60a9', 1),
 (2, 'Red Bull The Yellow Edition', '1.99', 'https://static-images.jumbo.com/product_images/154921BLK-1_360x360.png', '#fbd171', 1),
-(3, 'Coca-Cola', '0.70', 'https://static-images.jumbo.com/product_images/510416BLK-1_360x360.png', '#da1317c7', 1),
-(4, 'Autodrop Cadillacs ', '1.50', 'https://static-images.jumbo.com/product_images/168169DS-1_360x360.png', '#e95258d6', 2),
-(5, 'M&M\'s Chocolate Minis', '0.40', 'https://static-images.jumbo.com/product_images/124582ZK-1_360x360.png', '#4d2e21e6', 2),
+(3, 'Coca-Cola', '0.70', 'https://static-images.jumbo.com/product_images/510416BLK-1_360x360.png', '#e2474a', 1),
+(4, 'Autodrop Cadillacs ', '1.50', 'https://static-images.jumbo.com/product_images/168169DS-1_360x360.png', '#ed6e73', 2),
+(5, 'M&Ms Chocolate Minis', '0.40', 'https://static-images.jumbo.com/product_images/124582ZK-1_360x360.png', '#5e4237', 2),
 (6, 'Fuze Tea Black Tea Peach Hibiscus', '1.00', 'https://static-images.jumbo.com/product_images/100820181445_196524FLS-1_360x360.png', '#e56c7b', 1),
 (7, 'Fuze Tea Green Tea', '1.00', 'https://static-images.jumbo.com/product_images/100820181445_196522FLS-1_360x360.png', '#e5e445', 1);
 
@@ -173,7 +171,8 @@ INSERT INTO `transactions` (`id`, `user_id`, `price`, `date`, `product_id`) VALU
 (16, 5, '1.00', '2018-12-07 08:32:55', 6),
 (17, 5, '1.00', '2018-12-07 08:33:28', 6),
 (18, 5, '1.00', '2018-12-07 08:33:49', 6),
-(19, 5, '1.00', '2018-12-07 08:37:20', 6);
+(19, 5, '1.00', '2018-12-07 08:37:20', 6),
+(20, 5, '1.00', '2018-12-12 12:38:33', 6);
 
 -- --------------------------------------------------------
 
@@ -196,7 +195,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_email`, `user_rank`, `user_forgotpasscode`, `user_credit`) VALUES
-(5, 'maarten', '005147622d52a589c71d48564cabc35e', 'maarten.jakobs@gmail.com', 0, '', '59.00');
+(5, 'maarten', '005147622d52a589c71d48564cabc35e', 'maarten.jakobs@gmail.com', 0, '', '58.00');
 
 -- --------------------------------------------------------
 
@@ -217,11 +216,9 @@ CREATE TABLE `vendingassortiment` (
 --
 
 INSERT INTO `vendingassortiment` (`id`, `machine_id`, `product_id`, `position`, `stock`) VALUES
-(1, 2, 1, 11, 0),
-(2, 1, 2, 13, 10),
-(3, 1, 3, 15, 10),
-(4, 1, 4, 17, 9),
-(5, 1, 6, 42, -18);
+(23, 1, 6, 11, 5),
+(24, 2, 1, 1, 5),
+(25, 2, 2, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -328,7 +325,7 @@ ALTER TABLE `filters`
 -- AUTO_INCREMENT voor een tabel `mycard`
 --
 ALTER TABLE `mycard`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT voor een tabel `products`
@@ -340,7 +337,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT voor een tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -352,7 +349,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `vendingassortiment`
 --
 ALTER TABLE `vendingassortiment`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT voor een tabel `vendingmachines`

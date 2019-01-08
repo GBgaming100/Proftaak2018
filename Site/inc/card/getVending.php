@@ -7,7 +7,7 @@
 
         foreach ($vendingmachines as $key => $machine) {
             
-        $sql = "SELECT product_id FROM myCard WHERE user_id = 1 AND vending_id = ". $machine['id'];
+        $sql = "SELECT product_id FROM mycard WHERE user_id = 1 AND vending_id = ". $machine['id'];
 
         $ids = connectWithDatabase($sql);
 

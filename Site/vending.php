@@ -163,6 +163,8 @@
         </div> 
     </section>
 
+    <?php echo importFooter();?>
+
 </body>
 
     <?php 

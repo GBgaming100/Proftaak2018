@@ -1,5 +1,6 @@
 <?php
     include("../functions.php");
+    
         $user_id = $_POST['userId'];
 
     	$sql = "SELECT * FROM `vendingmachines` WHERE id in (SELECT vending_id FROM mycard where user_id = ".$user_id.")";
@@ -8,7 +9,7 @@
 
         foreach ($vendingmachines as $key => $machine) {
             
-        $sql = "SELECT product_id FROM myCard WHERE user_id = ".$user_id." AND vending_id = ". $machine['id'];
+        $sql = "SELECT product_id FROM mycard WHERE user_id = ".$user_id." AND vending_id = ". $machine['id'];
 
         $ids = connectWithDatabase($sql);
 

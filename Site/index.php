@@ -286,20 +286,9 @@
                 <h2 class="main-color js-about-title">My Vending</h2>
                 <p class="js-about-text">
                     
-                    Renegade Network is a group of gaming servers. Our aim is to bring joy to all of our players. Our objective is to give everyone a fantastic, enjoyable time. Do you like shooting? You're at the right adress! What our servers have in common:
+                    Wat is My Vending. My vending is een makkelijke website waar je van een afstand een lijstje kan maken met producten die je uit een snoep/drank automaat wilt hebben. Waarom via een website het voordeel van een website is dat je via internet kan betalen en dus niet meer met kleingeld over straat moet. Ook ga je met dit concept de rijen tegen die bij die automaten kan staan. Daarnaast is het voor de beheerders van de machines makkelijk om in de gaten te houden welke producten er veel worden gekocht en makkelijker inschatten hoeveel ze moeten inkopen. 
 
                 </p>
-                <ul class="list-unstyled about-short">
-                    <?php for ($i=0; $i < 5; $i++) { ?>
-                    <li>
-                        <i class="fas fa-check text-primary"></i>
-                        Gear up and dominate the world
-
-                    </li>
-
-                <?php } ?>
-
-                </ul>
             </div>
             <div class="col-lg-4 mb-4" 
                     data-sal="slide-right"
@@ -350,6 +339,8 @@
         <hr>   
 
     </section>
+
+    <?php echo importFooter();?>
 
 </body>
 

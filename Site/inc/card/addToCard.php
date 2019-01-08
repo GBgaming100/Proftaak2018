@@ -5,7 +5,7 @@
 	$vending_id = $_POST['vendingId'];
 	$user_id = $_POST['userId'];
 
-	$sql = "INSERT INTO myCard (user_id, product_id, vending_id) VALUES ('". $user_id ."', '". $value ."', '". $vending_id ."');";
+	$sql = "INSERT INTO mycard (user_id, product_id, vending_id) VALUES ('". $user_id ."', '". $value ."', '". $vending_id ."');";
 
 	connectWithDatabase($sql);
 

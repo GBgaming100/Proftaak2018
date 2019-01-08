@@ -5,9 +5,10 @@ include("../functions.php");
 $name = $_POST['name'];
 $price = $_POST['price'];
 $img = $_POST['img'];
+$cat = $_POST['cat'];
 $background = $_POST['color'];
 
-$sql = "INSERT INTO products (name, price, img, background)VALUES ('".$name."', ".$price.", '".$img."', '".$background."');";
+$sql = "INSERT INTO products (name, price, img, cat_id, background)VALUES ('".$name."', ".$price.", '".$img."', '".$cat."', '".$background."');";
 
 echo $sql;
 

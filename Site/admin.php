@@ -55,7 +55,34 @@
 
                 <?php } ?>
 
-                <button class="btn btn-secondary">Voeg Vendingmachine Toe <i class="fas fa-plus-circle"></i></button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#add-location">Voeg Vendingmachine Toe <i class="fas fa-plus-circle"></i></button>
+
+                <div class="modal fade" id="add-location" tabindex="-1" role="dialog" aria-labelledby="add-location-label" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="add-location-label">Nieuwe Vendingmachine</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-primary text-white" id="basic-addon1"><i class="fas fa-tag"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Vending Naam" aria-label="Vending Naam" aria-describedby="basic-addon1">
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                   
                 </div>
             </div>
@@ -157,12 +184,22 @@
               <th scope="col">#</th>
               <th scope="col"></th>
               <th scope="col">Naam</th>
-              <th scope="col">Prijs</th>
+              <th scope="col">Prijs €</th>
+              <th scope="col">Categorie</th>
               <th scope="col">Achtergrondkleur</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody id="products">
+
+            <?php
+
+            $sql = "SELECT id, name FROM categories";
+
+            $categories = connectWithDatabase($sql);
+
+            ?>
+
             <template id="products-template">
 
             {{#.}}
@@ -172,7 +209,21 @@
                 <img src="{{img}}" width="50px;" style="background: {{background}};" class="rounded-circle product-img" data-toggle="modal" data-target="#productimgModal">
               </td>
               <td><input type="text" value="{{name}}" class="product-name-input w-100"></td>
-              <td>€<input type="decimal" value="{{price}}" class="product-price" style="width: 75px;"></td>
+              <td><input type="decimal" value="{{price}}" class="product-price" style="max-width: 75px;"></td>
+
+              <td>
+                
+                <select class="categorie-select" name="categorie">
+                  <option value="{{cat_id}}">{{cat_name}}</option>
+                  {{#category_other}}
+
+                  <option value="{{id}}">{{name}}</option>
+
+                  {{/category_other}}
+                </select>
+
+              </td>
+
               <td>
                 <input type="color" value="{{background}}" class="color-selector">
                 <input type="text" value="{{background}}" class="color-text">
@@ -189,7 +240,25 @@
                 <img src="https://static-images.jumbo.com/product_images/492100FLS-1_360x360.png" width="50px;" class="rounded-circle product-img" data-toggle="modal" data-target="#productimgModal">
               </td>
               <td><input type="text" class="product-name-input w-100"></td>
-              <td>€<input type="decimal" class="product-price" style="width: 75px;"></td>
+              <td><input type="decimal" class="product-price" style="max-width: 75px;"></td>
+
+              <td>
+                
+                <select class="categorie-select" name="categorie">
+
+                  <?php
+
+                  $sql = "SELECT * FROM categories;";
+
+                  foreach (connectWithDatabase($sql) as $cat) { ?>
+
+                  <option value="<?php echo $cat['id'];?>"><?php echo $cat['name'];?></option>
+
+                  <?php } ?>
+                </select>
+
+              </td>
+
               <td>
                 <input type="color" class="color-selector">
                 <input type="text" class="color-text">
@@ -223,6 +292,48 @@
         </div>
 
         <button class="btn bnt-save-product btn-secondary" value="<?php echo $p['id'] ?>">Opslaan <i class="fas fa-save"></i></button>
+
+
+        <h3 class="section-title mt-3">Categorieën</h3>
+        <hr>
+
+        <table class="table">
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Naam</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+
+          <tbody id="categories">
+
+            <template id="categories-template">
+
+            {{#.}}
+            <tr class="update-categories-row">
+                
+                <td scope="row" class="categorie-id">{{id}}</td>
+                <td><input type="input" value="{{name}}"></td>
+                <td><button class="btn btn-delete-categories btn-danger" value="{{id}}"><i class="fas fa-minus-circle"></i></button></td>
+
+            </tr>
+            {{/.}}
+
+            <tr class="insert-categories-row bg-light">
+                
+                <td scope="row">{{id}}</td>
+                <td><input class="categorie-insert" type="input" value="{{name}}"></td>
+                <td></td>
+
+            </tr>
+
+            </template>
+
+          </tbody>
+        </table>
+
+        <button class="btn btn-secondary btn-save-categories">Opslaan <i class="fas fa-save"></i></button>
 
     </section>
 

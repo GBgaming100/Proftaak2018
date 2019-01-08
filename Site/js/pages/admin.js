@@ -74,6 +74,7 @@ var markers = [];
   });
 
   getProducts();
+  getCategories();
 
   function getVendingMachine(id)
   {
@@ -256,6 +257,7 @@ var markers = [];
         var name = $(value).find(".product-name-input").val();
         var price =$(value).find(".product-price").val();
         var img = $(value).find(".product-img").attr("src");
+        var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
 
         $.ajax({ 
@@ -266,6 +268,7 @@ var markers = [];
                 name: name,
                 price: price,
                 img: img,
+                cat: cat,
                 color: color
               },
           url: "inc/admin/updateproduct.php"
@@ -278,9 +281,9 @@ var markers = [];
         var name = $(value).find(".product-name-input").val();
         var price =$(value).find(".product-price").val();
         var img = $(value).find(".product-img").attr("src");
+        var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
 
-        console.log("name: " + name);
         if (name != "" && price != 0 && img != "" && color != "") 
         {
          $.ajax({ 
@@ -290,6 +293,7 @@ var markers = [];
                 name: name,
                 price: price,
                 img: img,
+                cat: cat,
                 color: color
               },
           url: "inc/admin/insertproduct.php"
@@ -349,3 +353,108 @@ var markers = [];
 
 
   }
+
+  function getCategories()
+  {
+    $.ajax({ 
+          type: "GET",
+          dataType: "json",
+          url: "inc/admin/getcategories.php",
+
+          success: function(data)
+          {  
+              console.table(data);
+
+              mustache(data, "#categories-template", "#categories");
+          }
+      });
+
+    $("table").on('input', ".insert-categories-row input", function()
+      {
+        var oldVal = $(this).val();
+
+        console.log(oldVal)
+
+        $(this).val("");
+
+        var input = $(this).closest("tr").clone();
+
+        $(this).val(oldVal);
+
+        var inputval = $(this).val();
+
+        $(this).closest("tr").next().remove();
+
+        if (inputval != "") 
+        {
+
+          $(input).find("input").val("");
+          $(this).closest( "table" ).append(input);
+
+        }
+      });
+  }
+
+  $("body").on("click", ".btn-delete-categories", function()
+    {
+
+      var id = $(this).val();
+
+      $.ajax({ 
+            type: "POST",
+            dataType: "json",
+            data:{
+                  id: id
+                },
+            url: "inc/admin/deletecategories.php"
+          });
+
+      getCategories();
+
+    });
+
+      $("body").on("click", ".btn-save-categories", function()
+    {
+
+      $(".update-categories-row").each(function(index, value)
+      {
+        var id = $(value).find(".categorie-id").html();
+        var name = $(value).find("input").val();
+
+        console.log(name);
+
+        $.ajax({ 
+          type: "POST",
+          dataType: "json",
+          data:{
+                id: id,
+                name: name
+              },
+          url: "inc/admin/updatecategories.php"
+        });
+
+      });
+
+      $(".insert-categories-row").each(function(index, value)
+      {
+        var name = $(value).find("input").val();
+
+        if (name != "") 
+        {
+
+          $.ajax({ 
+            type: "POST",
+            dataType: "json",
+            data:{
+                  name: name
+                },
+            url: "inc/admin/insertcategories.php"
+          });
+        }
+
+        name = "";
+      });
+
+      getCategories();
+
+    });

@@ -2,8 +2,14 @@
 
 include("../functions.php");
 
-$sql = "SELECT * FROM products";
+$sql = "SELECT p.*, c.name as cat_name FROM products p JOIN categories c ON c.id = p.cat_id";
 
-$products = connectWithDatabase($sql);
+$categories = connectWithDatabase($sql);
 
-echo json_encode($products);
+foreach ($categories as $key => $categorie) {
+
+	$sql = "SELECT * FROM `categories` WHERE NOT id = ".$categorie['cat_id'];
+	$categories[$key]["category_other"] = connectWithDatabase($sql);
+}
+
+echo json_encode($categories);

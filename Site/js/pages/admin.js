@@ -183,13 +183,25 @@ var markers = [];
 
   $("body").on("click", ".bnt-delete-item", function()
   {
+
     id = $(this).val();
+
+    product = $(this).data("product-id");
+
+    vending = $(".machineId").val()
+
+    console.log("item id: " + id);
+    console.log("product id: " + product);
+    console.log("vending id: " + vending);
 
     $.ajax({ 
       type: "POST",
       dataType: "json",
       data:{
-            id: id
+            id: id,
+                product: product,
+                vending: vending
+
           },
       url: "inc/admin/deletevending.php"
     });

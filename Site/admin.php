@@ -105,7 +105,7 @@
                       </td>
                       <td><input type="number" name="stock" value="{{stock}}" style="width: 60px;"></td>
                       <td>
-                        <button class="btn bnt-delete-item btn-danger" value="{{vendingassortiment_id}}"><i class="fas fa-minus-circle"></i></button>
+                        <button class="btn bnt-delete-item btn-danger" value="{{vendingassortiment_id}}" data-product-id="{{product_id}}"><i class="fas fa-minus-circle"></i></button>
                       </td>
                     </tr>
                     {{/.}}
@@ -226,6 +226,7 @@
 
     </section>
 
+    <?php echo importFooter();?>
 
 </body>
 

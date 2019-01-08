@@ -103,9 +103,7 @@ function saldo(value)
 		totalPrice += parseFloat(value['price']);
 	});
 
-	// console.log("Total Prince: €" + totalPrice);
-
-	$("#totalPrice-"+value['id']).text(totalPrice);
+	$("#totalPrice-"+value['id']).text(totalPrice.toFixed(2));
 
 	var currentSaldo = $("#saldoCurrent-"+value['id']).text();
 

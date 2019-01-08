@@ -5,6 +5,8 @@ $id = $_POST['id'];
 
 $sql = "DELETE FROM products WHERE id = ".$id.";";
 
-echo $sql;
+connectWithDatabase($sql);
+
+$sql = "DELETE FROM `mycard` WHERE product_id = ".$id.";";
 
 connectWithDatabase($sql);

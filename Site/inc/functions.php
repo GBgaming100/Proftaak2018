@@ -131,9 +131,18 @@
           </li>
 
           <li class="nav-item mr-1">
-            <a href="inc/user/signout.php" class="btn btn-primary text-white">
-              <i class="fas fa-sign-out-alt"></i> Sign Out
-            </a>
+
+          	<div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    welkom <?php echo $_SESSION["user"]; ?>
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			    <p class="dropdown-item"><i class="fas fa-money-bill-wave"></i> €<?php echo $user_credit;?></p>
+			    <a href="inc/user/signout.php" class="dropdown-item">
+              		<i class="fas fa-sign-out-alt"></i> Sign Out
+            	</a>
+			  </div>
+			</div>
           </li>
           
   		<?php } ?>
@@ -399,6 +408,62 @@
 
     alerts();
 
+	}
+
+	function importFooter()
+	{
+	?>
+
+	<footer class="py-5">
+	  <div class="container">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img src="img/icon.png" width="24">
+          <small class="d-block mb-3 text-muted">© 2018-2019</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Idee</h5>
+          <ul class="list-unstyled text-small">
+<!--             <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li> -->
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+<!--             <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li> -->
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+<!--             <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li> -->
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Roc ter-AA</h5>
+          <ul class="list-unstyled text-small">
+<!--             <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li> -->
+          </ul>
+        </div>
+      </div>
+  	</div>
+    </footer>
+
+    <?php
 	}
 
 	function js()

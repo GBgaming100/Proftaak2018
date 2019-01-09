@@ -131,10 +131,15 @@ function addToCard()
 
 function loadCF()
 {
+	console.log("id: " + machineId);
 
 	$.ajax({ 
-			type: "GET",
+			type: "POST",
 			dataType: "json",
+			data: 
+			{
+				id: machineId
+			},
 
 			url: "inc/product/extra.php",
 

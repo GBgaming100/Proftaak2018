@@ -167,6 +167,9 @@ var markers = [];
 
       if (position != "")
       {
+
+        console.log("product: " + product_id)
+
         $.ajax({ 
           type: "POST",
           dataType: "json",
@@ -178,7 +181,14 @@ var markers = [];
               },
           url: "inc/admin/insertvending.php"
         });
+
+        machineId = "";
+        position = "";
+        product = "";
+        stock = "";
+
       }
+
     });
   });
 
@@ -260,6 +270,8 @@ var markers = [];
         var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
 
+        console.log(img)
+
         $.ajax({ 
           type: "POST",
           dataType: "json",
@@ -284,6 +296,8 @@ var markers = [];
         var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
 
+        console.log(img);
+
         if (name != "" && price != 0 && img != "" && color != "") 
         {
          $.ajax({ 
@@ -304,10 +318,20 @@ var markers = [];
       getProducts();
 
     });
-
+    var productimg;
+    var newImg
     $(".product-img").on("click", function(){
 
-      productimg = $(this);
+      productimg = this;
+
+      $(".btn-change-product-img").on("click", function(){
+
+        img = $(".imgUrl-input").val();
+        console.log(img)
+
+        $(productimg).attr('src', $(".imgUrl-img").attr('src'));
+
+      });
 
       imgUrl = $(this).attr('src');
 
@@ -315,16 +339,16 @@ var markers = [];
       $(".imgUrl-img").attr('src', imgUrl);
 
       $(".imgUrl-input").on("input", function(){
-        $(".imgUrl-img").attr('src', $(this).val());
-      });
+        newImg = $(this).val();
+        $(".imgUrl-img").attr('src', newImg);
 
-      $(".btn-change-product-img").on("click", function(){
-
-        productimg.attr('src', $(".imgUrl-img").attr('src'));
+        console.log(newImg)
 
       });
 
     });
+
+    
 
     $("table").on('input', ".insert-product-row input", function()
       {

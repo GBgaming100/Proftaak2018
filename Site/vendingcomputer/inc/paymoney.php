@@ -14,7 +14,7 @@
 	$sql = "UPDATE users SET user_credit = ".$newBalance." WHERE user_id = ".$userId.";";
 	connectWithDatabase($sql);
 
-	$sql = "DELETE FROM myCard WHERE product_id = (SELECT product_id FROM vendingassortiment WHERE position = ".$productPosition." AND machine_id = ".$vendingId.") AND user_id = '". $userId ."';";
+	$sql = "DELETE FROM mycard WHERE product_id = (SELECT product_id FROM vendingassortiment WHERE position = ".$productPosition." AND machine_id = ".$vendingId.") AND user_id = '". $userId ."';";
 	connectWithDatabase($sql);
 
 ?>

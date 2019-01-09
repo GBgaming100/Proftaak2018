@@ -313,6 +313,11 @@ input[type='checkbox'] + .checkbox, input[type='radio'] + .checkbox {
   {
     display: none;
   }
+
+  #map
+  {
+    display: none;
+  }
 }
 
 #barcode .modal-dialog

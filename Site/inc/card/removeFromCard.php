@@ -9,6 +9,6 @@
 	
 	addMessage("info", $product.", is van de lijst verwijderd.");
 
-	$sql = "DELETE FROM myCard WHERE id = '". $value ."' AND user_id = '". $user_id ."';";
+	$sql = "DELETE FROM mycard WHERE id = '". $value ."' AND user_id = '". $user_id ."';";
 	connectWithDatabase($sql);
 ?>

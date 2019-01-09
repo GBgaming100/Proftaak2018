@@ -130,6 +130,24 @@
             </a>
           </li>
 
+          <?php
+
+            if ($_SESSION['id'] != 0) {
+
+          ?>
+
+          <li class="nav-item te">
+            <a class="nav-link text-white" href="admin.php">
+              <i class="fas fa-toolbox"></i> Admin
+            </a>
+          </li>
+
+          <?php
+
+            }
+
+          ?>
+
           <li class="nav-item mr-1">
 
           	<div class="dropdown">

@@ -47,11 +47,13 @@ function removeFromCard()
 			
 		});
 
+		setTimeout(
+		  function() 
+		  {
+		    getCard();
 
-		getCard();
-
-		alerts();
-		alerts();
+			alerts();
+		  }, 300);
 	});
 
 }

@@ -120,10 +120,13 @@ function addToCard()
 			
 		});
 
-		getCard();
+		setTimeout(
+		  function() 
+		  {
+		    getCard();
 
-		alerts();
-		alerts();
+			alerts();
+		  }, 300);
 		
 
 	});

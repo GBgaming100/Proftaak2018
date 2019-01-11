@@ -344,11 +344,13 @@ qr-decoder (qrcodelib.js) -> https://github.com/LazarSoft/jsqrcode
 			return output;
 		},
 		beep: function() {
-			if (typeof Self.options.beep != 'string') return;
-			var url = Self.options.beep;
-			setTimeout(function() {
-				new Audio(url).play();
-			}, 0);
+			// if (typeof Self.options.beep != 'string') return;
+			// var url = Self.options.beep;
+			// setTimeout(function() {
+			// 	new Audio(url).play();
+			// }, 0);
+
+			console.log("scan");
 		}
 	};
 	$.fn[pluginName] = function(options) {

@@ -105,7 +105,7 @@ function addToCard()
 		var vending = $(this).data("machine");
 		var user = $(this).data("user");
 
-		console.log(id);
+		console.log(vending);
 
 		$.ajax({ 
 			type: "POST",

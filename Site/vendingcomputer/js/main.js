@@ -125,7 +125,7 @@ function vendingdata(value)
 
             oldQr = Time_out;
 
-            var url = Self.options.beep;
+            var url = "audio/beep.mp3";
             setTimeout(function() {
                 new Audio(url).play();
             }, 0);

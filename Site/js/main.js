@@ -33,7 +33,7 @@ function removeFromCard()
 
 		var id = $(this).data("product");
 
-		// console.log(id);
+		console.log("card id: " + id);
 
 		$.ajax({ 
 			type: "POST",
@@ -118,6 +118,13 @@ function saldo(value)
 	if (saldoAfter < 0) 
 	{
 		saldoField.css("color", "red");
+		$(".btn-genratebarcode").hide();
+		$(".btn-addmoney").show();
+	}
+	else
+	{
+		$(".btn-genratebarcode").show();
+		$(".btn-addmoney").hide();
 	}
 }
 

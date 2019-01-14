@@ -80,14 +80,14 @@
                             School project ROC ter-AA
                         </h3>
 
-                        <button class="mt-4 btn btn-primary"
+                        <button class="mt-4 btn btn-primary scrollvendingmachines"
                         data-sal-duration="1500"
                         data-sal="fade"
                         data-sal-delay="500"
                         data-sal-easing="ease-out-bounce">
                             Vind Vending Machine
                         </button>
-                        <button class="mt-4 btn btn-primary"
+                        <button class="mt-4 btn btn-primary scrollproducts"
                         data-sal-duration="1000"
                         data-sal="fade"
                         data-sal-delay="500"
@@ -120,7 +120,7 @@
 
     </section>
 
-    <section class="container mt-4">
+    <section id="products-section" class="container mt-4">
 
         <h3 class="section-title">Producten</h3>
         <hr>   
@@ -220,7 +220,7 @@
         </div> 
     </section>
 
-    <section class="container mt-4">
+    <section class="container mt-4" id="vendings-section">
 
         <h3 class="section-title">Locaties</h3>
         <hr>   

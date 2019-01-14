@@ -268,3 +268,17 @@ function gotovending()
 		window.location = url;
 	});
 }
+
+$(".scrollvendingmachines").on("click", function()
+{
+ $('html, body').animate({
+      scrollTop: $("#vendings-section").offset().top
+    }, 1000)
+});
+
+$(".scrollproducts").on("click", function()
+{
+ $('html, body').animate({
+      scrollTop: $("#products-section").offset().top
+    }, 1000)
+});

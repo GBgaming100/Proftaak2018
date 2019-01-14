@@ -3,8 +3,13 @@
 
 	function connectWithDatabase($sql)
 	{
-		$connect = mysqli_connect("localhost","root","", "myvending"); //localhost
-
+    if ($_SERVER['HTTP_HOST'] == "localhost") {
+      $connect = mysqli_connect("localhost","root","", "myvending"); //localhost
+    }
+    else{
+      $connect = mysqli_connect("localhost","vending","102200", "myvending"); //amxdev
+    }
+		
 		$resource = mysqli_query($connect, $sql);
 	    $retuning_array = array();
 	    while($result = mysqli_fetch_assoc($resource))
@@ -247,6 +252,10 @@
 			        <button class="btn btn-secondary btn-genratebarcode w-100 mt-4" data-toggle="modal" data-target="#barcode" value="{{id}}">
 			        	<i class="fas fa-money-bill"></i> Betalen
 			        </button>
+
+              <button class="btn btn-secondary btn-addmoney w-100 mt-4">
+                <i class="fas fa-money-check-alt"></i> Balans opwaarderen
+              </button>
 
 			      </div>
 			    </div>

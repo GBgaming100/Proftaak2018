@@ -158,7 +158,7 @@ var WebCodeCamJS = function(element) {
 
     function beep() {
         if (options.beep) {
-            beepSound.play();
+            console.log("scann");
         }
     }
 

@@ -286,7 +286,7 @@
       </div>
       <div class="modal-footer text-center">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
-        <button type="button" class="btn btn-primary">Help</button>
+        <!-- <button type="button" class="btn btn-primary">Help</button> -->
       </div>
     </div>
   </div>
@@ -373,7 +373,7 @@
 
         </div> 
       <div class="modal-footer">
-         <button type="submit" class="btn btn-primary">Login</button>
+         <button type="submit" class="btn btn-secondary">Login</button>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -423,7 +423,7 @@
             </div>
         </div> 
       <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-create">Create Account</button>
+          <button type="submit" class="btn btn-secondary btn-create">Create Account</button>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

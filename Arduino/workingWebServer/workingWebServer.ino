@@ -42,7 +42,6 @@ void loop()
   tmSystem.run();
 }
 
-<<<<<<< HEAD
 void tick()
 {
   //handle program logic
@@ -51,15 +50,6 @@ void tick()
 
   //log debug information
 //  LogDebugInfo();
-=======
-void loop() {
-  digitalWrite(doRow3Mboo,HIGH);
-  digitalWrite(doColum4Mboo,HIGH);
-  delay(2850);
-  digitalWrite(doRow3Mboo,LOW);
-  digitalWrite(doColum4Mboo,LOW);
-  delay(2850);
->>>>>>> parent of d1b1ebc... arduino update
 }
 
 //checks for incoming serial commands

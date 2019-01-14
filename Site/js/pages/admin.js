@@ -224,20 +224,24 @@ var markers = [];
 
   function editProduct()
   {
-    $(".color-text").on("input", function()
+    $("body").on("input", ".color-text", function()
     {
       color = $(this).val();
       $(this).closest("tr").find(".product-img").css("background", color);;
 
       $(this).closest("tr").find(".color-selector").val(color);
+
+      console.log(color);
     });
 
-    $(".color-selector").on("change", function()
+    $("body").on("change", ".color-selector", function()
     {
       color = $(this).val();
       $(this).closest("tr").find(".product-img").css("background", color);;
 
       $(this).closest("tr").find(".color-text").val(color);
+
+      console.log(color);
     });
 
     $("body").on("click", ".bnt-delete-product", function(){

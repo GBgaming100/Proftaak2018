@@ -32,7 +32,6 @@ var markers = [];
               markers.push(marker);
 
           });
-          console.table(markers)
       }
   });
 
@@ -66,8 +65,6 @@ var markers = [];
 
   $("body").on("click", ".view-vending", function(){
       id = $(this).data("vending");
-
-      console.log(id);
 
       getVendingMachine(id);
 
@@ -112,8 +109,6 @@ var markers = [];
   $("table").on('input', ".add-product input", function()
   {
     var oldVal = $(this).val();
-
-    console.log(oldVal)
 
     $(this).val("");
 
@@ -168,8 +163,6 @@ var markers = [];
       if (position != "")
       {
 
-        console.log("product: " + product_id)
-
         $.ajax({ 
           type: "POST",
           dataType: "json",
@@ -201,10 +194,6 @@ var markers = [];
 
     vending = $(".machineId").val()
 
-    console.log("item id: " + id);
-    console.log("product id: " + product);
-    console.log("vending id: " + vending);
-
     $.ajax({ 
       type: "POST",
       dataType: "json",
@@ -230,8 +219,6 @@ var markers = [];
       $(this).closest("tr").find(".product-img").css("background", color);;
 
       $(this).closest("tr").find(".color-selector").val(color);
-
-      console.log(color);
     });
 
     $("body").on("change", ".color-selector", function()
@@ -240,8 +227,6 @@ var markers = [];
       $(this).closest("tr").find(".product-img").css("background", color);;
 
       $(this).closest("tr").find(".color-text").val(color);
-
-      console.log(color);
     });
 
     $("body").on("click", ".bnt-delete-product", function(){
@@ -255,7 +240,6 @@ var markers = [];
             },
         url: "inc/admin/deleteproduct.php",
         error: function(data){
-            console.log(data);
           }
       });
 
@@ -264,7 +248,6 @@ var markers = [];
 
     $(".bnt-save-product").on("click", function(){
 
-      console.log("------Update------")
       $(".update-product-row").each(function(index, value)
       {
         var id = $(value).find(".product-id").text();
@@ -273,8 +256,6 @@ var markers = [];
         var img = $(value).find(".product-img").attr("src");
         var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
-
-        console.log(img)
 
         $.ajax({ 
           type: "POST",
@@ -291,7 +272,6 @@ var markers = [];
         });
       });
 
-      console.log("------Insert------");
       $(".insert-product-row").each(function(index, value)
       {
         var name = $(value).find(".product-name-input").val();
@@ -299,8 +279,6 @@ var markers = [];
         var img = $(value).find(".product-img").attr("src");
         var cat = $(value).find(".categorie-select").val();
         var color = $(value).find(".color-text").val();
-
-        console.log(img);
 
         if (name != "" && price != 0 && img != "" && color != "") 
         {
@@ -331,7 +309,6 @@ var markers = [];
       $(".btn-change-product-img").on("click", function(){
 
         img = $(".imgUrl-input").val();
-        console.log(img)
 
         $(productimg).attr('src', $(".imgUrl-img").attr('src'));
 
@@ -346,8 +323,6 @@ var markers = [];
         newImg = $(this).val();
         $(".imgUrl-img").attr('src', newImg);
 
-        console.log(newImg)
-
       });
 
     });
@@ -357,8 +332,6 @@ var markers = [];
     $("table").on('input', ".insert-product-row input", function()
       {
         var oldVal = $(this).val();
-
-        console.log(oldVal)
 
         $(this).val("");
 
@@ -390,8 +363,7 @@ var markers = [];
           url: "inc/admin/getcategories.php",
 
           success: function(data)
-          {  
-              console.table(data);
+          { 
 
               mustache(data, "#categories-template", "#categories");
           }
@@ -400,8 +372,6 @@ var markers = [];
     $("table").on('input', ".insert-categories-row input", function()
       {
         var oldVal = $(this).val();
-
-        console.log(oldVal)
 
         $(this).val("");
 
@@ -448,8 +418,6 @@ var markers = [];
       {
         var id = $(value).find(".categorie-id").html();
         var name = $(value).find("input").val();
-
-        console.log(name);
 
         $.ajax({ 
           type: "POST",

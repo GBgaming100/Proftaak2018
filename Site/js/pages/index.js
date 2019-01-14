@@ -31,7 +31,7 @@ $( window ).resize(function(){
 
 $(window).load(function(){
 
-	setTimeout(function() {cardHeights(); checkWitdh(); console.log("edited")}, 20);
+	setTimeout(function() {cardHeights(); checkWitdh();}, 20);
 
 
 })
@@ -106,8 +106,6 @@ function addToCard()
 
 		var id = $(this).val();
 		var vending = 1;
-
-		console.log(id);
 
 		$.ajax({ 
 			type: "POST",
@@ -196,8 +194,6 @@ function catergoryfilter(){
 
 function getproducts()
 {
-	console.log("run");
-
 	$.ajax({ 
 			type: "POST",
 			dataType: "json",

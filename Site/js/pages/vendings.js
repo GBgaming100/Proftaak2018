@@ -32,7 +32,7 @@ $( window ).resize(function(){
 
 $(window).load(function(){
 
-	setTimeout(function() {cardHeights(); console.log("edited")}, 20);
+	setTimeout(function() {cardHeights();}, 20);
 
 })
 
@@ -105,8 +105,6 @@ function addToCard()
 		var vending = $(this).data("machine");
 		var user = $(this).data("user");
 
-		console.log(vending);
-
 		$.ajax({ 
 			type: "POST",
 			dataType: "json",
@@ -134,7 +132,6 @@ function addToCard()
 
 function loadCF()
 {
-	console.log("id: " + machineId);
 
 	$.ajax({ 
 			type: "POST",
@@ -206,7 +203,6 @@ function catergoryfilter(){
 
 function getproducts()
 {
-	console.log(machineId);
 
 	$.ajax({ 
 			type: "POST",

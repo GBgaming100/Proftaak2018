@@ -2,7 +2,6 @@ $.getScript( "js/functions/function_mustache.js" );
 $.getScript( "js/functions/function_debug.js" );
 
 var user = $("#mycard").data("user");
-console.log(user);
 
 $( document ).ready(function() {
 	navbarSpacer();
@@ -32,8 +31,6 @@ function removeFromCard()
 	$("body").on("click", ".btn-deleteCardItem", function(){
 
 		var id = $(this).data("product");
-
-		console.log("card id: " + id);
 
 		$.ajax({ 
 			type: "POST",
@@ -147,8 +144,6 @@ function cardPay()
 			success: function(data)
 			{  
 
-				// console.log(data);
-
 				var string = "";
 
 				string = id + "(";
@@ -171,8 +166,6 @@ function cardPay()
 
 				string += timenow;
 
-				console.log(string);
-
 				generateQR("#testQR", string, "svg");
 			}
 		});
@@ -180,7 +173,7 @@ function cardPay()
 }
 
 function generateQR(container, text, type){
-	console.log("runnning")
+
   $(container).html('');
   $(container).qrcode({
     // render method: 'canvas', 'image' or 'div'
@@ -268,7 +261,6 @@ function lazyloading()
 
 	function setLazy(){    
 	    lazy = document.getElementsByClassName('lazy');
-	    // console.log('Found ' + lazy.length + ' lazy images');
 	} 
 
 	function lazyLoad(){
@@ -321,7 +313,6 @@ var expandWith = 5;
 var maxAmount = 0;
 function transactions()
 {
-	console.log("transactions ready");
 	$.ajax({ 
 			type: "POST",
 			dataType: "json",
@@ -344,7 +335,6 @@ function transactions()
 }
 
 $(".btn-loadmore").on("click", function(){
-		console.log(maxAmount)
 		
 		if (totalShown + expandWith < maxAmount) {
 			totalShown += expandWith;

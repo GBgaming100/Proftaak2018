@@ -1,4 +1,4 @@
-My Vending
+![alt text](https://github.com/GBgaming100/Proftaak2018/blob/master/logo.PNG?raw=true)
 
 -Max van den Boom & Maarten Jakobs
 

@@ -361,4 +361,5 @@ input[type='checkbox'] + .checkbox, input[type='radio'] + .checkbox {
 #testQR div
 {
   transform: scaleX(-1);
+  margin: 0 auto !important;
 }

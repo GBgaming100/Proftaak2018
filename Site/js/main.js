@@ -20,10 +20,17 @@ $( document ).ready(function() {
 
 $(window).resize(function(){
 
-	
+	$(".alert-container").css("top", ($('nav').height() + 20));
 
 })
 
+$(".navbar-toggler").on("click", function(){
+	setTimeout(
+		  function() 
+		  {
+			$(".alert-container").css("top", ($('nav').height() + 20));
+		  }, 300);
+})
 
 function removeFromCard()
 {
@@ -191,7 +198,7 @@ function generateQR(container, text, type){
     top: 0,
 
     // size in pixel
-    // size: 500,
+    size: 250,
 
     // code color or image element
     fill: '#000',
@@ -239,6 +246,7 @@ function alerts()
 
 		success: function(data)
 		{  
+			$(".alert-container").css("top", ($('nav').height() + 20));
 
 			$.each(data, function(i, v)
 			{

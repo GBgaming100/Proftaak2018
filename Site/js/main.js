@@ -22,20 +22,6 @@ $( document ).ready(function() {
   	console.log("user: " + user);
 });
 
-$(window).resize(function(){
-
-	$(".alert-container").css("top", ($('nav').height() + 20));
-
-})
-
-$(".navbar-toggler").on("click", function(){
-	setTimeout(
-		  function() 
-		  {
-			$(".alert-container").css("top", ($('nav').height() + 20));
-		  }, 300);
-})
-
 function removeFromCard()
 {
 
@@ -250,8 +236,6 @@ function alerts()
 
 		success: function(data)
 		{  
-			$(".alert-container").css("top", ($('nav').height() + 20));
-
 			$.each(data, function(i, v)
 			{
 				$(".alert-container").append('<div class="alert alert-'+v['Type']+' m-t-1 text-xs-center" role="alert"><i class="'+v['Icon']+' fa-fw fa-lg"></i> '+v['Text']+'</div>');

@@ -109,39 +109,24 @@
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav float-right">
 
-		<?php if (!isset($_SESSION["user"])) { ?>
-
-        <ul class="navbar-nav float-right">
-          <li class="nav-item mr-1">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-              <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-          </li>
-
-          <li class="nav-item mr-1">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAccountModal">
-              <i class="fas fa-user-plus"></i> creëer account
-            </button>
-          </li>
-  		<?php }else{ ?>
-      
+        <ul class="navbar-nav m-auto">
+          
           <li class="nav-item te">
-            <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-shopping-basket"></i> Winkelmandje
+            <a class="nav-link text-white" href="index.php#vendings-section">
+               Locaties
             </a>
           </li>
 
           <li class="nav-item te">
-            <a class="nav-link text-white" data-toggle="modal" data-target="#transactionsModal" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-clipboard-list"></i> Transacties
+            <a class="nav-link text-white" href="index.php#products-section">
+               Producten
             </a>
           </li>
 
           <li class="nav-item te">
             <a class="nav-link text-white" href="index.php#about-us-section">
-              <i class="fas fa-info-circle"></i> Over ons
+               Over ons
             </a>
           </li>
 
@@ -172,24 +157,66 @@
 
           ?>
 
+        </ul>
+        <ul class="navbar-nav mr-0">
+
+		<?php if (!isset($_SESSION["user"])) { ?>
+
+        <ul class="navbar-nav float-right">
+          <li class="nav-item mr-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </li>
+
+          <li class="nav-item mr-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAccountModal">
+              <i class="fas fa-user-plus"></i> creëer account
+            </button>
+          </li>
+  		<?php }else{ ?>
+
           <li class="nav-item mr-1">
 
-          	<div class="dropdown">
-			  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    welkom <?php echo $_SESSION["user"]; ?>
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <p class="dropdown-item"><i class="fas fa-money-bill-wave"></i> €<?php echo $user_credit;?></p>
-			    <a href="inc/user/signout.php" class="dropdown-item">
-              		<i class="fas fa-sign-out-alt"></i> Sign Out
-            	</a>
-			  </div>
-			</div>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                welkom <?php echo $_SESSION["user"]; ?>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a href="#" class="dropdown-item"><i class="fas fa-money-bill-wave"></i> €<?php echo $user_credit;?></a>
+
+                <a class="dropdown-item" data-toggle="modal" data-target="#transactionsModal" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-clipboard-list"></i> Transacties
+                  </a>
+
+                <a class="dropdown-item" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-shopping-basket"></i> Winkelmandje
+                  </a>
+
+                <a href="inc/user/signout.php" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </a>
+              </div>
+            </div>
+
           </li>
           
-  		<?php } ?>
+      <?php } ?>
 
         </ul>
+      
+          <!-- <li class="nav-item te">
+            <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-shopping-basket"></i> Winkelmandje
+            </a>
+          </li>
+
+          <li class="nav-item te">
+            <a class="nav-link text-white" data-toggle="modal" data-target="#transactionsModal" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-clipboard-list"></i> Transacties
+            </a>
+          </li>
+ -->
       </div>
     </div>
     </nav>

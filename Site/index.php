@@ -120,6 +120,48 @@
 
     </section>
 
+    <section class="container mt-4" id="vendings-section">
+
+        <h3 class="section-title">Locaties</h3>
+        <hr>   
+
+        <div class="row">
+            
+            <div class="col-lg-3 mb-4">
+                <div class="list-group">
+                <?php
+
+                $sql = "SELECT * FROM vendingmachines";
+
+                $vendingmachines = connectWithDatabase($sql);
+
+                foreach ($vendingmachines as $vending) {
+
+                ?>
+                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" data-marker="<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"
+                        data-sal-duration="1500"
+                        data-sal="slide-right"
+                        data-sal-delay="<?php echo $vending['id'] * 150;?>"
+                        data-sal-easing="ease-out-bounce">
+                    <?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
+
+                <?php } ?>
+                  
+                </div>
+            </div>
+            <div class="col-lg-9 mb-4">
+                <div id="map" style="width:100%;height:400px;z-index:1;"></div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
     <section id="products-section" class="container mt-4">
 
         <h3 class="section-title">Producten</h3>
@@ -219,49 +261,7 @@
 
         </div> 
     </section>
-
-    <section class="container mt-4" id="vendings-section">
-
-        <h3 class="section-title">Locaties</h3>
-        <hr>   
-
-        <div class="row">
-            
-            <div class="col-lg-3 mb-4">
-                <div class="list-group">
-                <?php
-
-                $sql = "SELECT * FROM vendingmachines";
-
-                $vendingmachines = connectWithDatabase($sql);
-
-                foreach ($vendingmachines as $vending) {
-
-                ?>
-                  <p data-link="vending.php?id=<?php echo $vending['id'];?>" data-marker="<?php echo $vending['id'];?>" class="dblVending list-group-item list-group-item-action"
-                        data-sal-duration="1500"
-                        data-sal="slide-right"
-                        data-sal-delay="<?php echo $vending['id'] * 150;?>"
-                        data-sal-easing="ease-out-bounce">
-                    <?php echo $vending['name'];?> <i class="fas fa-chevron-circle-right float-right"></i></p>
-
-                <?php } ?>
-                  
-                </div>
-            </div>
-            <div class="col-lg-9 mb-4">
-                <div id="map" style="width:100%;height:400px;z-index:1;"></div>
-
-
-
-
-
-            </div>
-
-        </div>
-
-    </section>
-
+    
     <section class="container mt-4" id="about-us-section">
 
         <h3 class="section-title">Over Ons</h3>

@@ -3,6 +3,8 @@ $.getScript( "js/functions/function_debug.js" );
 
 var user = $("#mycard").data("user");
 
+
+
 $( document ).ready(function() {
 	navbarSpacer();
   	sal();
@@ -16,6 +18,8 @@ $( document ).ready(function() {
   	lazyloading();
 
   	transactions();
+
+  	console.log("user: " + user);
 });
 
 $(window).resize(function(){

@@ -91,10 +91,12 @@
 
 	function importHeader($scrolled)
 	{
+    if (isset($_SESSION["user"])) {
 
-		$sql = "SELECT user_credit FROM users WHERE user_id = 5";
-		$user_credit = connectWithDatabase($sql)[0]['user_credit'];
+		  $sql = "SELECT user_credit FROM users WHERE user_id = ". $_SESSION["id"];
+		  $user_credit = connectWithDatabase($sql)[0]['user_credit'];
 
+    }
 	?>
 
 	<nav class="navbar navbar-expand-lg navbar-light <?php echo $scrolled; ?>">
@@ -110,6 +112,8 @@
         <ul class="navbar-nav float-right">
 
 		<?php if (!isset($_SESSION["user"])) { ?>
+
+        <ul class="navbar-nav float-right">
           <li class="nav-item mr-1">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
               <i class="fas fa-sign-in-alt"></i> Login
@@ -125,7 +129,7 @@
       
           <li class="nav-item te">
             <a class="nav-link text-white" data-toggle="modal" data-target="#mycard" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-shopping-basket"></i> Lijst
+              <i class="fas fa-shopping-basket"></i> Winkelmandje
             </a>
           </li>
 
@@ -135,9 +139,23 @@
             </a>
           </li>
 
+          <li class="nav-item te">
+            <a class="nav-link text-white" href="index.php#about-us-section">
+              <i class="fas fa-info-circle"></i> Over ons
+            </a>
+          </li>
+
           <?php
 
-            if ($_SESSION['id'] != 0) {
+            if(isset($_SESSION['id']))
+          {
+
+          $sql = "SELECT user_rank FROM users WHERE user_id = ". $_SESSION['id'].";";
+
+          $user_rank = connectWithDatabase($sql)[0]['user_rank'];
+
+          if( $user_rank != 0 )
+          {
 
           ?>
 
@@ -150,6 +168,7 @@
           <?php
 
             }
+          }
 
           ?>
 

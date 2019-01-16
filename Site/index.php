@@ -262,7 +262,7 @@
 
     </section>
 
-    <section class="container mt-4">
+    <section class="container mt-4" id="about-us-section">
 
         <h3 class="section-title">Over Ons</h3>
         <hr>   

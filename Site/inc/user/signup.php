@@ -55,6 +55,9 @@
 			$sql = "INSERT INTO users (user_name, user_email, user_password)VALUES ('".$name."', '".$email."', '".$encrypted."')";
 			
 			connectWithDatabase($sql);
+
+			$sql = "SELECT user_id FROM users WHERE user_name = '".$name."' AND user_email = '".$email."';";
+		  	$_SESSION["id"] = connectWithDatabase($sql)[0]['user_id'];
 		}
 		else
 		{

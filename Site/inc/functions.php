@@ -1,24 +1,81 @@
 <?php
 	session_start();
 
-	function connectWithDatabase($sql)
-	{
-    if ($_SERVER['HTTP_HOST'] == "localhost") {
-      $connect = mysqli_connect("localhost","root","", "myvending"); //localhost
-    }
-    else{
-      $connect = mysqli_connect("localhost","vending","102200", "myvending"); //amxdev
-    }
-		
-		$resource = mysqli_query($connect, $sql);
-	    $retuning_array = array();
-	    while($result = mysqli_fetch_assoc($resource))
-	    {
-	    	$retuning_array[] = $result;
-	    }
-	    return $retuning_array;
-	}
+	function createConn()
+    {
 
+        if ($_SERVER['HTTP_HOST'] == "localhost") 
+        {
+            $host = "localhost";
+            $user = "root";
+            $password = "";
+            $db_name = "myvending";
+        }
+        else
+        {
+            $host = "localhost";
+            $user = "vending";
+            $password = "102200";
+            $db_name = "myvending";
+        }
+        
+        return new mysqli($host, $user, $password, $db_name);
+    }
+
+    function GetFromDatabase($query, $params)
+    {
+        $conn = createConn();
+
+        if($conn->connect_error)
+        {
+            die("$conn->connect_errno: $conn->connect_error");
+        }
+
+        $stmt = $conn->stmt_init();
+        if(!$stmt->prepare($query))
+        {
+            print "Failed to prepare statement\n";
+        }
+        else
+        {
+
+            call_user_func_array(array($stmt, 'bind_param'), $params);
+            $arr =[];
+            
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while($row = $result->fetch_assoc()) {
+              $arr[] = $row;
+            }
+            // if(!$arr) exit('No rows');
+            // else
+            return($arr);
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+
+    function PostToDatabase($query, $params)
+    {
+        // Create connection
+        $conn = createConn();
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // prepare and bind
+        $stmt = $conn->prepare($query);
+        call_user_func_array(array($stmt, 'bind_param'), $params);
+
+        // set parameters and execute
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+    }
 
 	function styleAndStuffs()
 	{
@@ -93,8 +150,10 @@
 	{
     if (isset($_SESSION["user"])) {
 
-		  $sql = "SELECT user_credit FROM users WHERE user_id = ". $_SESSION["id"];
-		  $user_credit = connectWithDatabase($sql)[0]['user_credit'];
+		  $sql = "SELECT user_credit FROM users WHERE user_id = ?;";
+      $params = ['i', &$_SESSION['id']];
+
+		  $user_credit = GetFromDatabase($sql, $params)[0]['user_credit'];
 
     }
 	?>
@@ -135,9 +194,10 @@
             if(isset($_SESSION['id']))
           {
 
-          $sql = "SELECT user_rank FROM users WHERE user_id = ". $_SESSION['id'].";";
+          $sql = "SELECT user_rank FROM users WHERE user_id = ?;";
+          $params = ['i', &$_SESSION['id']];
 
-          $user_rank = connectWithDatabase($sql)[0]['user_rank'];
+          $user_rank = GetFromDatabase($sql, $params)[0]['user_rank'];
 
           if( $user_rank != 0 )
           {

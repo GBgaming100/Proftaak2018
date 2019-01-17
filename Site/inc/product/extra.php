@@ -8,19 +8,23 @@
 
             $id = $_POST['id'];
 
-        	$sql = "SELECT * FROM `categories` WHERE `id` in (SELECT cat_id FROM products WHERE id in (SELECT product_id FROM vendingassortiment WHERE machine_id = ".$id."))";
+        	$sql = "SELECT * FROM `categories` WHERE `id` in (SELECT cat_id FROM products WHERE id in (SELECT product_id FROM vendingassortiment WHERE machine_id = ?));";
+            $params = ['i', &$id];
 
-        	$cats = connectWithDatabase($sql);
+            $cats = GetFromDatabase($sql, $params);
 
             foreach ($cats as $key => $cat) {
-                $sql = "SELECT count(cat_id) as total FROM products WHERE cat_id = ".$cat['id']." AND id IN (SELECT product_id FROM vendingassortiment WHERE machine_id = ".$id.")"; 
+                $sql = "SELECT count(cat_id) as total FROM products WHERE cat_id = ? AND id IN (SELECT product_id FROM vendingassortiment WHERE machine_id = ?);"; 
+                $params = ['ii', &$cat['id'], &$id];
 
-                $cats[$key]['total'] = connectWithDatabase($sql)[0]['total'];
+                $cats[$key]['total'] = GetFromDatabase($sql, $params)[0]['total'];
             }
 
-            $sql = "SELECT * FROM filters";
+            $sql = "SELECT * FROM filters WHERE ?";
+            $one = 1;
+            $params = ['i', &$one];
 
-            $filters = connectWithDatabase($sql);
+            $filters = GetFromDatabase($sql, $params);
 
             $extras = $arrayName = array('categories' => $cats, 'filters' => $filters);
 
@@ -28,19 +32,23 @@
         }
         else
         {
-            $sql = "SELECT * FROM `categories`";
+            $sql = "SELECT * FROM categories WHERE ?";
+            $one = 1;
+            $params = ['i', &$one];
 
-            $cats = connectWithDatabase($sql);
+            $cats = GetFromDatabase($sql, $params);
 
             foreach ($cats as $key => $cat) {
-                $sql = "SELECT count(cat_id) as total FROM products WHERE cat_id = ".$cat['id']; 
+                $sql = "SELECT count(cat_id) as total FROM products WHERE cat_id = ?;"; 
+                $params = ['i', &$cat['id']];
 
-                $cats[$key]['total'] = connectWithDatabase($sql)[0]['total'];
+                $cats[$key]['total'] = GetFromDatabase($sql, $params)[0]['total'];
             }
 
-            $sql = "SELECT * FROM filters";
+            $sql = "SELECT * FROM filters WHERE ?";
+            $params = ['i', &$one];
 
-            $filters = connectWithDatabase($sql);
+            $filters = GetFromDatabase($sql, $params);
 
             $extras = $arrayName = array('categories' => $cats, 'filters' => $filters);
 

@@ -2,8 +2,10 @@
 
 include("../functions.php");
 
-$sql = "SELECT * FROM vendingmachines";
+$sql = "SELECT * FROM vendingmachines WHERE ?";
+$one = 1;
+$params = ['i', &$one];
 
-$machines = connectWithDatabase($sql);
+$machines = GetFromDatabase($sql, $params);
 
 echo json_encode($machines);

@@ -4,9 +4,10 @@
 
     $id = $_GET['id'];
 
-    $sql = "SELECT * FROM products WHERE id = ". $id;
+    $sql = "SELECT * FROM products WHERE id = ?";
+    $params =['i', &$id];
 
-    $product = connectWithDatabase($sql)[0];
+    $product = GetFromDatabase($sql, $params)[0];
 
 ?>
 
@@ -60,9 +61,10 @@
               <div class="list-group">
                 <?php
 
-                $sql = "SELECT m.* FROM  `vendingmachines` m JOIN vendingassortiment a ON m.id = a.machine_id WHERE a.product_id =".$id;
+                $sql = "SELECT m.* FROM  `vendingmachines` m JOIN vendingassortiment a ON m.id = a.machine_id WHERE a.product_id =?;";
+                $params = ['i', &$id];
 
-                $vendingmachines = connectWithDatabase($sql);
+                $vendingmachines = GetFromDatabase($sql, $params);
 
                 foreach ($vendingmachines as $vending) {
 
@@ -80,9 +82,10 @@
 
             <?php
 
-                $sql = "SELECT * FROM products WHERE NOT id = ". $id;
+                $sql = "SELECT * FROM products WHERE NOT id = ?;";
+                $params = ['i', &$id];
 
-                $otherproducts = connectWithDatabase($sql);
+                $otherproducts = GetFromDatabase($sql, $params);
 
                 foreach ($otherproducts as $other) {
 

@@ -10,8 +10,7 @@ $cat = $_POST['cat'];
 $background = $_POST['color'];
 
 
-$sql = "UPDATE products SET name = '".$name."', price = '".$price."', img = '".$img."', cat_id = '".$cat."', background = '".$background."' WHERE id = ".$id.";";
+$sql = "UPDATE products SET name = ?, price = ?, img = ?, cat_id = ?, background = ? WHERE id = ?;";
+$params = ['sssssi', &$name, &$price, &$img, &$cat, &$background, &$id];
 
-echo $sql;
-
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

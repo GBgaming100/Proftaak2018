@@ -6,6 +6,7 @@ $position = $_POST['position'];
 $product = $_POST['product'];
 $stock = $_POST['stock'];
 
-$sql = "INSERT INTO vendingassortiment (product_id, position, stock, machine_id)VALUES (".$product.", ".$position.", ".$stock.", ".$machine.");";
+$sql = "INSERT INTO vendingassortiment (product_id, position, stock, machine_id)VALUES (?, ?, ?, ?);";
+$params = ['iiii', &$product, &$position, &$stock, &$machine];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

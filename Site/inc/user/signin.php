@@ -10,13 +10,17 @@ $email = $_POST['username'];
 
 $password = $_POST['password'];
 
+$salt = "8dC_9Kl?";
+
 $encrypted = md5($password . $salt);
 
-	$salt = "8dC_9Kl?";
+	
 
-	$sql = "SELECT user_id, user_name FROM users WHERE (user_name = '".$username."' OR user_email = '".$email."') AND user_password = '".$encrypted."'";
+    $sql = "SELECT user_id, user_name FROM users WHERE (user_name = ? OR user_email = ?) AND user_password = ?;";
 
-    $user = connectWithDatabase($sql);
+    $params = [ "sss", &$username, &$email, &$encrypted];
+
+    $user = GetFromDatabase($sql, $params);
 
 	if (empty($user)) {
 

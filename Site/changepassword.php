@@ -18,17 +18,19 @@
             if (isset($_GET['id'])){
               $resetpasskey = $_GET['id'];
 
-              $sql = "UPDATE users SET user_password = '".$password."', user_forgotpasscode='' WHERE `user_forgotpasscode` = '".$resetpasskey."'";
+              $sql = "UPDATE users SET user_password = ?, user_forgotpasscode='' WHERE `user_forgotpasscode` = ?;";
+              $params = ['ss', &$password, &$resetpasskey];
 
-              connectWithDatabase($sql);
+              PostToDatabase($query, $params);
 
             }
             if (isset($_SESSION['user'])) {
               $username = $_SESSION['user'];
 
-              $sql = "UPDATE users SET user_password = '".$password."' WHERE `user_name` = '".$username."'";
-
-              connectWithDatabase($sql);
+              $sql = "UPDATE users SET user_password = ? WHERE `user_name` = ?";
+              $params = ['ss', &$password, &$username];
+              
+              PostToDatabase($query, $params);
             }
 
               $message = "Your password has been succesfully changed";

@@ -2,6 +2,8 @@
 
 include("../functions.php");
 
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM categories WHERE ?;";
+$one = 1;
+$params = ['i', &$one];
 
-echo json_encode(connectWithDatabase($sql));
+echo json_encode(GetFromDatabase($sql, $params));

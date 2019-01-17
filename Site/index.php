@@ -2,6 +2,12 @@
     
     include("inc/functions.php");
 
+    $id = 3;
+
+    $sql = "SELECT * FROM products WHERE id = ?;";
+    $params = [ "i", &$id];
+
+    var_dump(GetFromDatabase($sql, $params));
 ?>
 
 <!DOCTYPE html>
@@ -131,9 +137,12 @@
                 <div class="list-group">
                 <?php
 
-                $sql = "SELECT * FROM vendingmachines";
+                $sql = "SELECT * FROM vendingmachines WHERE ?;";
 
-                $vendingmachines = connectWithDatabase($sql);
+                $id = 1;
+                $params = [ "i", &$id];
+
+                $vendingmachines = GetFromDatabase($sql, $params);
 
                 foreach ($vendingmachines as $vending) {
 
@@ -298,9 +307,12 @@
 
                 <?php 
 
-            $sql = "SELECT * FROM about";
+            $sql = "SELECT * FROM about WHERE ?";
 
-            $about = connectWithDatabase($sql);
+            $id = 1;
+            $params = [ "i", &$id];
+
+            $about = GetFromDatabase($sql, $params);
 
             foreach ($about as $a) {
 

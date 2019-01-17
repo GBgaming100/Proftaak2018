@@ -3,10 +3,12 @@
 include("../functions.php");
 $id = $_POST['id'];
 
-$sql = "DELETE FROM categories WHERE id = ".$id.";";
+$sql = "DELETE FROM categories WHERE id = ?;";
+$params = ['i', &$id];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);
 
-$sql = "UPDATE products SET cat_id = 0 WHERE cat_id = ".$id.";";
+$sql = "UPDATE products SET cat_id = 0 WHERE cat_id = ?;";
+$params = ['i', &$id];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

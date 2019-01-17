@@ -23,26 +23,32 @@
 		if($name != "" && $email != "" && $password != "") {
 
 
-		$sql = "SELECT user_id, user_name FROM users WHERE user_name = '".$name."'";
+		$sql = "SELECT user_id, user_name FROM users WHERE user_name = ?;";
+		$params = [ "s", &$name];
 
-     	$username = connectWithDatabase($sql);
+     	$username = GetFromDatabase($sql, $params);
 
 		if(empty($username))
 		{
 			$nameUsed = false;
 			$message .= "Email is allready used";
 			$type = "danger";
+
+
 		}
 
-		$sql = "SELECT user_id, user_name FROM users WHERE user_email = '".$email."'";
 
-     	$useremail = connectWithDatabase($sql);
+		$sql = "SELECT user_id, user_name FROM users WHERE user_email = ?";
+		$params = [ "s", &$email];
+
+     	$useremail = GetFromDatabase($sql, $params);
 
 		if(empty($useremail))
 		{
 			$emailUsed = false;
 			$message .= "Username is allready used";
 			$type = "danger";
+
 		}
 
 		if($nameUsed == false && $emailUsed == false)
@@ -51,13 +57,16 @@
 			$type = "success";
 
 			$_SESSION["user"] = $name;
-
-			$sql = "INSERT INTO users (user_name, user_email, user_password)VALUES ('".$name."', '".$email."', '".$encrypted."')";
 			
-			connectWithDatabase($sql);
+			$sql = "INSERT INTO users (user_name, user_email, user_password)VALUES (?, ?, ?)";
+			$params = [ "sss", &$name, &$email, &$encrypted];
 
-			$sql = "SELECT user_id FROM users WHERE user_name = '".$name."' AND user_email = '".$email."';";
-		  	$_SESSION["id"] = connectWithDatabase($sql)[0]['user_id'];
+     		PostToDatabase($sql, $params);
+
+			$sql = "SELECT user_id FROM users WHERE user_name = ? AND user_email = ?;";
+			$params = [ "ss", &$name, &$email];
+
+		  	$_SESSION["id"] = GetFromDatabase($sql, $params)[0]['user_id'];
 		}
 		else
 		{

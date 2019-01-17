@@ -3,13 +3,15 @@
 include("../functions.php");
 $id = $_POST['id'];
 
-$sql = "DELETE FROM vendingassortiment WHERE id = ".$id.";";
+$sql = "DELETE FROM vendingassortiment WHERE id = ?;";
+$params = ['i', &$id];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);
 
 $product = $_POST['product'];
 $vending = $_POST['vending'];
 
-$sql = "DELETE FROM `mycard` WHERE product_id = ".$product." AND vending_id= ".$vending.";";
+$sql = "DELETE FROM `mycard` WHERE product_id = ? AND vending_id= ?;";
+$params = ['i', &$product, &$vending];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

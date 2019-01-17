@@ -8,6 +8,7 @@ $product = $_POST['product'];
 $stock = $_POST['stock'];
 
 
-$sql = "UPDATE vendingassortiment SET product_id = ".$product.", position = ".$position.", stock = ".$stock." WHERE id = ".$id.";";
+$sql = "UPDATE vendingassortiment SET product_id = ?, position = ?, stock = ? WHERE id = ?;";
+$params = ['iiii', &$product, &$position, &$stock, &$id];
 
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

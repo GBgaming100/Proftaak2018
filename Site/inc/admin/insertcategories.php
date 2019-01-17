@@ -4,8 +4,7 @@ include("../functions.php");
 
 $name = $_POST['name'];
 
-$sql = "INSERT INTO categories (name)VALUES ('".$name."');";
+$sql = "INSERT INTO categories (name)VALUES (?);";
+$params = ['s', &$name];
 
-echo $sql;
-
-connectWithDatabase($sql);
+PostToDatabase($sql, $params);

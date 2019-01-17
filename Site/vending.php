@@ -4,9 +4,10 @@
 
     $id = $_GET['id'];
 
-    $sql = "SELECT name FROM vendingmachines WHERE id = ". $id;
+    $sql = "SELECT name FROM vendingmachines WHERE id = ?;";
+    $params = ['i', &$id];
 
-    $name = connectWithDatabase($sql)[0]['name'];
+    $name = GetFromDatabase($sql, $params)[0]['name'];
 
 ?>
 

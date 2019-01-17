@@ -16,9 +16,12 @@
         }
         else
         {
-            $sql = "SELECT id FROM categories";
+            $sql = "SELECT id FROM categories WHERE ?";
 
-            $catogories = connectWithDatabase($sql);
+            $one = 1;
+            $params = ['i', &$one];
+
+            $catogories = GetFromDatabase($sql, $params);
 
             $i = array();
 
@@ -29,10 +32,12 @@
             $catogories = $i;
         }
 
-    	$sql = "SELECT p.* FROM products as p WHERE p.cat_id IN (".implode(", ", $catogories).") AND p.name LIKE '%".$search."%' ". $filter .";";
+    	$sql = "SELECT p.* FROM products as p WHERE p.cat_id IN (".implode(", ", $catogories).") AND p.name LIKE ? ".$filter.";";
+        $search_string = '%'. $search . '%';
 
-    	$products = connectWithDatabase($sql);
+        $params = [ "s", &$search_string];
 
+    	$products = GetFromDatabase($sql, $params);
 		echo json_encode($products);
 
 ?>

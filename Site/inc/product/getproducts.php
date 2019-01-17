@@ -19,9 +19,10 @@
         }
         else
         {
-            $sql = "SELECT id FROM `categories` WHERE `id` in (SELECT cat_id FROM products WHERE id in (SELECT product_id FROM vendingassortiment WHERE machine_id = ".$id."))";
+            $sql = "SELECT id FROM `categories` WHERE `id` in (SELECT cat_id FROM products WHERE id in (SELECT product_id FROM vendingassortiment WHERE machine_id = ?))";
+            $params = ['i', &$id];
 
-            $catogories = connectWithDatabase($sql);
+            $catogories = GetFromDatabase($sql, $params);
 
             $i = array();
 
@@ -35,9 +36,11 @@
         // var_dump($catogories);
 
 
-    	$sql = "SELECT p.* , v.stock, v.machine_id FROM products AS p JOIN vendingassortiment AS v ON p.id = v.product_id WHERE p.cat_id IN (".implode(", ", $catogories).") AND p.name LIKE '%".$search."%' AND v.machine_id = ".$id." ". $filter .";";
+    	$sql = "SELECT p.* , v.stock, v.machine_id FROM products AS p JOIN vendingassortiment AS v ON p.id = v.product_id WHERE p.cat_id IN (".implode(", ", $catogories).") AND p.name LIKE ? AND v.machine_id = ? ".$filter.";";
+        $search_string = '%'.$search."%";
+        $params = ['si', &$search_string, &$id];
 
-    	$products = connectWithDatabase($sql);
+    	$products = GetFromDatabase($sql, $params);
 
 		echo json_encode($products);
 

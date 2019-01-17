@@ -1,15 +1,17 @@
 <?php
     include("../functions.php");
 
-    	$sql = "SELECT * FROM `vendingmachines` WHERE id in (SELECT vending_id FROM mycard where user_id = 1)";
+    	$sql = "SELECT * FROM `vendingmachines` WHERE id in (SELECT vending_id FROM mycard where user_id = ?)";
+        $params = ['i', &$_SESSION['id']];
 
-    	$vendingmachines = connectWithDatabase($sql);
+    	$vendingmachines = GetFromDatabase($sql, $params);
 
         foreach ($vendingmachines as $key => $machine) {
             
-        $sql = "SELECT product_id FROM mycard WHERE user_id = 1 AND vending_id = ". $machine['id'];
+        $sql = "SELECT product_id FROM mycard WHERE user_id = ? AND vending_id = ?;";
+        $params = ['ii', &$_SESSION['id'], &$machine['id']];
 
-        $ids = connectWithDatabase($sql);
+        $ids = GetFromDatabase($sql, $params);
 
         $idArray = [];
 
@@ -18,9 +20,11 @@
             array_push($idArray, $id['product_id']);
         }
 
-        $sql = "SELECT * FROM products WHERE id in(". implode(", ",$idArray) .")";
+        $sql = "SELECT * FROM products WHERE ? AND id in(". implode(", ",$idArray) .")";
+        $one = 1;
+        $params = ['i', &$one];
 
-        $cardItems = connectWithDatabase($sql);
+        $cardItems = GetFromDatabase($sql, $params);
 
         $vendingmachines[$key]['card'] = $cardItems;
 

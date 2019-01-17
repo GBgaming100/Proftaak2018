@@ -38,9 +38,10 @@
     if(isset($_SESSION['id']))
     {
 
-    $sql = "SELECT user_rank FROM users WHERE user_id = ". $_SESSION['id'].";";
+    $sql = "SELECT user_rank FROM users WHERE user_id = ?;";
+    $params = ['i', &$_SESSION['id']];
 
-    $user_rank = connectWithDatabase($sql)[0]['user_rank'];
+    $user_rank = GetFromDatabase($sql, $params)[0]['user_rank'];
 
     if( $user_rank != 0 )
     {
@@ -58,9 +59,11 @@
                 <div class="list-group">
                 <?php
 
-                $sql = "SELECT * FROM vendingmachines";
+                $sql = "SELECT * FROM vendingmachines WHERE ?";
+                $one = 1;
+                $params = ['i', &$one];
 
-                $vendingmachines = connectWithDatabase($sql);
+                $vendingmachines = GetFromDatabase($sql, $params);
 
                 foreach ($vendingmachines as $vending) {
 
@@ -161,9 +164,11 @@
                         <select>
                           <?php
 
-                          $sql = "SELECT id, name FROM products";
+                          $sql = "SELECT id, name FROM products WHERE ?";
+                          $one = 1;
+                          $params =['i', &$one];
 
-                          foreach(connectWithDatabase($sql) as $product){;
+                          foreach(GetFromDatabase($sql, $params) as $product){;
 
                           ?>
                             <option value="<?php echo $product['id'] ?>"><?php echo $product['name'] ?></option>
@@ -208,9 +213,11 @@
 
             <?php
 
-            $sql = "SELECT id, name FROM categories";
+            $sql = "SELECT id, name FROM categories WHERE ?";
+            $one = 1;
+            $params = ['i', &$one];
 
-            $categories = connectWithDatabase($sql);
+            $categories = GetFromDatabase($sql, $params);
 
             ?>
 
@@ -260,11 +267,7 @@
                 
                 <select class="categorie-select" name="categorie">
 
-                  <?php
-
-                  $sql = "SELECT * FROM categories;";
-
-                  foreach (connectWithDatabase($sql) as $cat) { ?>
+                  <?php foreach ($categories as $cat) { ?>
 
                   <option value="<?php echo $cat['id'];?>"><?php echo $cat['name'];?></option>
 

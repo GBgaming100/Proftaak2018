@@ -53,7 +53,7 @@
           <p>Vraag hier uw nieuwe wachtwoord aan</p>
           <div class="panel-body">
 
-            <form id="register-form" role="form" autocomplete="off" class="form" action="inc/sendpassrequest.php" method="post">
+            <form id="register-form" role="form" autocomplete="off" class="form" action="inc/user/sendpassrequest.php" method="post">
 
               <div class="form-group">
                 <div class="input-group">
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                <input name="recover-submit" class="btn btn-lg btn-secondary btn-block" value="Reset Password" type="submit">
               </div>
               
               <input type="hidden" class="hide" name="token" id="token" value=""> 

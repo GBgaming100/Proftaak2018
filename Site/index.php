@@ -1,13 +1,7 @@
 <?php 
     
     include("inc/functions.php");
-
-    $id = 3;
-
-    $sql = "SELECT * FROM products WHERE id = ?;";
-    $params = [ "i", &$id];
-
-    var_dump(GetFromDatabase($sql, $params));
+    
 ?>
 
 <!DOCTYPE html>
